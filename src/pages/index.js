@@ -70,11 +70,11 @@ const Banner = () => {
     <div>
       <div className="d-flex flex-column flex-md-row justify-content-center" style={{ marginBottom: '8em' }}>
 
-        <div className="w-md-50 mx-md-3" style={{ minWidth: '420px' }}>
+        <div className="w-md-50 mx-md-3" style={{ minWidth: '380px' }}>
           <StaticImage
             src="../images/alicia_perfil.webp"
             loading="lazy"
-            width={420}
+            width={380}
             quality={100}
             formats={["auto", "webp", "avif"]}
             alt="Alicia Agosti Interiorismo"

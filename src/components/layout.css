@@ -34,7 +34,6 @@ html {
   font-size: var(--font-md);
   line-height: var(--line-height-normal);
   overflow-y: scroll;
-  border: 1px solid black;
 }
 
 body {
