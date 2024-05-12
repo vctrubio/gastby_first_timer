@@ -1,6 +1,6 @@
 import React from "react"
 
-export const PortfolioAll = () => {
+const PortfolioAll = () => {
     //create array of 20 names in madrid
     let list = ['serrano', 'budapest', 'hummanry', 'chicago', 'france']
     
@@ -10,3 +10,5 @@ export const PortfolioAll = () => {
         </div>
     )
 }
+
+export default PortfolioAll;

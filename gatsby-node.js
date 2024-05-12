@@ -12,9 +12,11 @@ exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
   createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
-    context: {},
+    path: "/portfolio/test",
+    component: require.resolve("./src/pages/contentful.js"),
+    context: {
+      slug: "test",
+    },
     defer: true,
   })
 }
