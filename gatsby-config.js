@@ -7,6 +7,11 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Alicia Agosti`,
@@ -39,5 +44,13 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    //added by me
+    {
+      resolve: "gatsby-source-contentful",
+      options: {
+        spaceId: "jxh2gme99rx2",
+        accessToken: "msRLdfERKa356t4_vF7jBoQUpKGwF8sjLRPJRoAA8bU",
+      },
+    }
   ],
 }
