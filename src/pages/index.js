@@ -12,6 +12,7 @@ import * as styles from "../components/index.module.css"
 import "../components/layout_customs.css"
 
 import { Card } from "../components/card"
+import { Footer } from "../components/footer";
 
 const LogoBar = ({ setActiveComponent }) => {
   return (
@@ -165,6 +166,7 @@ const IndexPage = ({ data }) => {
       {activeComponent === "banner" && <Banner />}
       {activeComponent === "portfolio" && <PortfolioAll data={data} />}
       {activeComponent === "info" && <About />}
+      <Footer />
     </div>
   )
 }

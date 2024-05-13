@@ -13,6 +13,6 @@
 }
 
 .card-portfolio:hover {
-    border: 4px solid rgb(255, 255, 255);
+    border: 4px solid rgb(68, 61, 61);
     transition: border-width 0.1s linear;
 }
