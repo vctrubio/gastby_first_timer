@@ -34,14 +34,15 @@ const LogoBar = ({ setActiveComponent }) => {
   )
 }
 
-const NavBar = ({ setActiveComponent }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const list = ['serrano', 'budapest', 'hummanry', 'chicago', 'france']
-
+const NavBar = ({ setActiveComponent, nodes }) => {
+  const [isHovered, setIsHovered] = useState(true);
+  console.log('data i c u ;', nodes)
   return (
     <div className="navbar">
       <div onClick={() => setActiveComponent("banner")}>About</div>
-      <div onClick={() => setActiveComponent("portfolio")}>Portfolio</div>
+      <div onClick={() => setActiveComponent("portfolio")}>
+        Portfolio
+      </div>
       <div onClick={() => setActiveComponent("about")}>Info</div>
     </div>
   )
@@ -49,7 +50,7 @@ const NavBar = ({ setActiveComponent }) => {
 
 const About = () => {
   return (
-    <div className="about-main" style={{ marginBottom: '10em' }}>
+    <div className="about-main" style={{ marginBottom: '4em' }}>
       <div>
         <h1 style={{ marginBottom: '0' }}>¿Que hacemos?</h1>
         <p className="p-2">En todos los proyectos, nos adaptamos al cliente y a sus necesidades, pero esto es una pequeña guía para orientarte en nuestro sector.</p>
@@ -71,6 +72,24 @@ const About = () => {
     </div>
   )
 }
+
+
+const BottomUps = (data) => {
+  return (
+    <div className="bu">
+      {/* <h1>Bottom ups</h1>
+      <div className="d-flex justify-content-around">
+        {data.map((item) => (
+          <div key={item.id}>
+            <GatsbyImage image={getImage(item.allPhotos[0])} alt={item.titleOfPost} />
+            <p>{item.titleOfPost}</p>
+          </div>
+        ))}
+      </div> */}
+    </div>
+  )
+}
+
 
 const Banner = () => {
   return (
@@ -103,40 +122,6 @@ const Banner = () => {
     </div>
   )
 }
-const getPosts = async () => {
-  const spaceId = 'jxh2gme99rx2';
-  const environmentId = 'your_environment_id';
-
-  try {
-    const response = await axios.get(`https://cdn.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries`, {
-      params: {
-        access_token: 'your_access_token',
-        content_type: 'post'
-      }
-    });
-
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const PortfolioAllOld = () => {
-  //create array of 20 names in madrid
-  let list = ['serrano', 'budapest', 'hummanry', 'chicago', 'france', 'france', 'france', 'france']
-
-  return (
-    <div className="portfolio-all">
-      {list.map((item, index) => (
-        <div className="m-3 text-align-center" key={index}>
-
-          <Card title={item} description="description" cover={`../images/${item}.webp`} />
-
-        </div>
-      ))}
-    </div>
-  )
-}
 
 const PortfolioAll = ({ data }) => {
   const posts = data.allContentfulAliciaContent.edges;
@@ -146,8 +131,9 @@ const PortfolioAll = ({ data }) => {
       {posts.map(
         ({ node }) => (
           <div key={node.id}
-            onClick={() => console.log('clicking on node ', node.id)}
-            >
+
+          // onClick={() => window.location.href = `/${node.slug}`}
+          >
             <Card title={node.titleOfPost} description={node.descriptionOfPost.descriptionOfPost} coverUrl={node.allPhotos[0].file.url} />
           </div>
         )
@@ -162,10 +148,14 @@ const IndexPage = ({ data }) => {
   return (
     <div style={{ textAlign: 'center' }}>
       <LogoBar setActiveComponent={setActiveComponent} />
-      <NavBar setActiveComponent={setActiveComponent} />
+      <NavBar setActiveComponent={setActiveComponent} nodes={data.allContentfulAliciaContent.edges} />
       {activeComponent === "banner" && <Banner />}
       {activeComponent === "portfolio" && <PortfolioAll data={data} />}
       {activeComponent === "info" && <About />}
+
+      <div className="d-flex justify-content-center">
+        <BottomUps data={data.allContentfulAliciaContent.edges} />
+      </div>
       <Footer />
     </div>
   )
@@ -181,6 +171,7 @@ export const queryGL = graphql`
       edges {
         node {
           id
+          slug
           titleOfPost
           descriptionOfPost {
             descriptionOfPost

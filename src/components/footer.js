@@ -20,7 +20,7 @@ export const Footer = () => {
                     <SVG src={phoneSVG} className='svg-icon' />
                 </a>
                 <div className='d-none d-md-block'>
-                    +34 630 19 91 12
+                    630 19 91 12
                 </div>
             </div>
             <a href="https://www.instagram.com/alicia.agosti.interiorismo/">

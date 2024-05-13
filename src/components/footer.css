@@ -3,10 +3,11 @@ footer{
     color: white;
     font-size: 24px;
     margin-top: 5em;
+    margin-bottom: 1em;
     height: 100px;
 
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 
     >* {
