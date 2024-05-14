@@ -1,23 +1,24 @@
 import * as React from "react"
 import { useState } from 'react';
-import axios from 'axios';
-
 import { graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-
 import { StaticImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
-
-import * as styles from "../components/index.module.css"
 import "../components/layout_customs.css"
-
 import { Card } from "../components/card"
 import { Footer } from "../components/footer";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-const LogoBar = ({ setActiveComponent }) => {
+export const LogoBar = ({ setActiveComponent }) => {
+  const handleClick = () => {
+    if (setActiveComponent) {
+      setActiveComponent("banner");
+    } else {
+      window.location.href = '/';
+    }
+  };
+
   return (
-    <div className="d-flex justify-content-around"
-      onClick={() => setActiveComponent("banner")}>
+    <div className="d-flex justify-content-around" onClick={handleClick}>
       <StaticImage
         src="../images/logo.webp"
         loading="eager"
@@ -30,13 +31,11 @@ const LogoBar = ({ setActiveComponent }) => {
           marginTop: `var(--space-3)`,
         }}
       />
-    </div >
-  )
-}
-
+    </div>
+  );
+};
 const NavBar = ({ setActiveComponent, nodes }) => {
   const [isHovered, setIsHovered] = useState(true);
-  console.log('data i c u ;', nodes)
   return (
     <div className="navbar">
       <div onClick={() => setActiveComponent("banner")}>About</div>
@@ -119,31 +118,95 @@ const Banner = () => {
       </div>
 
       <About />
+      
+      <div className="d-flex justify-content-center">
+        <BottomUps />
+      </div>
+
     </div>
   )
 }
 
 const PortfolioAll = ({ data }) => {
+  const [contentfulTmp, setContentfulTmp] = useState(null);
   const posts = data.allContentfulAliciaContent.edges;
+
+  const handleCardClick = (cardData) => {
+    setContentfulTmp(cardData);
+  };
+
+  const PostView = ({ posts }) => {
+    return (
+      posts.map(({ node }) => (
+        <div key={node.id} onClick={() => handleCardClick(node)}>
+          <Card
+            title={node.titleOfPost}
+            description={node.descriptionOfPost.descriptionOfPost}
+            coverUrl={node.allPhotos[0].file.url}
+          />
+        </div>
+      ))
+    );
+  };
 
   return (
     <div className="portfolio-all">
-      {posts.map(
-        ({ node }) => (
-          <div key={node.id}
-
-          // onClick={() => window.location.href = `/${node.slug}`}
-          >
-            <Card title={node.titleOfPost} description={node.descriptionOfPost.descriptionOfPost} coverUrl={node.allPhotos[0].file.url} />
-          </div>
-        )
+      {contentfulTmp ? (
+        <div className="d-flex flex-column">
+          <ContenfulCard data={contentfulTmp} />
+          <button onClick={() => setContentfulTmp(false)} style={{ border: '1px solid black' }}>
+            back
+          </button>
+        </div>
+      ) : (
+        <PostView posts={posts} />
       )}
+
+    </div>
+  )
+}
+
+const ContenfulCard = (data) => {
+  const node = data.data
+  const [isLoading, setIsLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    if (node.allPhotos.length > 0) {
+      setIsLoading(false)
+    }
+  }, [node.allPhotos])
+
+  return (
+    <div>
+      <div className="container text-center mt-4">
+        <div>
+          <h1 style={{ fontSize: '44px' }}>{node.titleOfPost}</h1>
+          <p style={{ fontSize: '20px' }}>{node.descriptionOfPost.descriptionOfPost}</p>
+        </div>
+        <div>
+          {isLoading ? (
+            <p>No photos...</p>
+          ) : (
+            node.allPhotos.map((photo) => (
+              photo.gatsbyImageData && (
+                <GatsbyImage
+                  key={photo.id}
+                  image={photo.gatsbyImageData}
+                  alt={node.titleOfPost}
+                  style={{ margin: '1rem' }}
+                />
+              )
+            ))
+          )}
+        </div>
+      </div>
     </div>
   )
 }
 
 const IndexPage = ({ data }) => {
   const [activeComponent, setActiveComponent] = useState("banner");
+  console.log('data: ', data)
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -153,9 +216,7 @@ const IndexPage = ({ data }) => {
       {activeComponent === "portfolio" && <PortfolioAll data={data} />}
       {activeComponent === "info" && <About />}
 
-      <div className="d-flex justify-content-center">
-        <BottomUps data={data.allContentfulAliciaContent.edges} />
-      </div>
+
       <Footer />
     </div>
   )
