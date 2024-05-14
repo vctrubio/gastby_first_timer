@@ -35,7 +35,7 @@ export const LogoBar = ({ setActiveComponent }) => {
   );
 };
 
-const NavBar = ({ setActiveComponent, nodes }) => {
+const NavBar = ({ setActiveComponent, nodes, searchTerm, setSearchTerm }) => {
   let titlesOfPost = [];
 
   nodes.map(({ node }) => {
@@ -43,24 +43,43 @@ const NavBar = ({ setActiveComponent, nodes }) => {
   })
 
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+
+    if (event.target.value.length > 0)
+      setActiveComponent('portfolio');
+    else
+      setActiveComponent('banner')
+
+    //hit enter and set the result[0] to the active component
+    
+  };
+
   return (
     <div className="navbar">
-      <div onClick={() => setActiveComponent("banner")}>About</div>
+      <input className="search-bar"
+        type="text"
+        placeholder="Mi Portfolio..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+
       <div onClick={() => setActiveComponent("portfolio")}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        >
-        Portfolio
+        className="dropdown-toggle"
+
+      >
       </div>
       {isHovered &&
         <div className="dropdown"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           {titlesOfPost.map((item, index) => <div key={index}>{item}</div>)}
         </div>
       }
-      <div onClick={() => setActiveComponent("about")}>Info</div>
     </div>
   )
 }
@@ -145,17 +164,28 @@ const Banner = () => {
   )
 }
 
-const PortfolioAll = ({ data }) => {
+const PortfolioAll = ({ data, searchTerm, setSearchTerm }) => {
   const [contentfulTmp, setContentfulTmp] = useState(null);
-  const posts = data.allContentfulAliciaContent.edges;
+  const [filteredPosts, setFilteredPosts] = useState(data.allContentfulAliciaContent.edges);
+
+  React.useEffect(() => {
+    const posts = data.allContentfulAliciaContent.edges;
+
+    if (searchTerm.length > 0) {
+      setFilteredPosts(posts.filter(({ node }) => node.titleOfPost.toLowerCase().includes(searchTerm.toLowerCase())));
+    } else {
+      setFilteredPosts(posts);
+    }
+  }, [searchTerm, data]);
 
   const handleCardClick = (cardData) => {
+    setSearchTerm('');
     setContentfulTmp(cardData);
   };
 
   const PostView = ({ posts }) => {
     return (
-      posts.map(({ node }) => (
+      filteredPosts.map(({ node }) => (
         <div key={node.id} onClick={() => handleCardClick(node)}>
           <Card
             title={node.titleOfPost}
@@ -177,9 +207,8 @@ const PortfolioAll = ({ data }) => {
           </button>
         </div>
       ) : (
-        <PostView posts={posts} />
+        <PostView posts={filteredPosts} />
       )}
-
     </div>
   )
 }
@@ -224,16 +253,15 @@ const ContenfulCard = (data) => {
 
 const IndexPage = ({ data }) => {
   const [activeComponent, setActiveComponent] = useState("banner");
-  console.log('data: ', data)
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <div style={{ textAlign: 'center' }}>
       <LogoBar setActiveComponent={setActiveComponent} />
-      <NavBar setActiveComponent={setActiveComponent} nodes={data.allContentfulAliciaContent.edges} />
+      <NavBar setActiveComponent={setActiveComponent} nodes={data.allContentfulAliciaContent.edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {activeComponent === "banner" && <Banner />}
-      {activeComponent === "portfolio" && <PortfolioAll data={data} />}
+      {activeComponent === "portfolio" && <PortfolioAll data={data} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />}
       {activeComponent === "info" && <About />}
-
 
       <Footer />
     </div>

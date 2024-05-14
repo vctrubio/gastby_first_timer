@@ -1,23 +1,24 @@
 import * as React from "react"
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import Seo from "../components/seo"
+import { LogoBar } from "./index";
 
-const Contenful = (prop) => {
-
-    //isLoading state
+const Contentful = (prop) => {
     const [isLoading, setIsLoading] = React.useState(true)
 
     const ptr = prop.data.contentfulAliciaContent
-
+    
     React.useEffect(() => {
         if (ptr.allPhotos.length > 0) {
             setIsLoading(false)
         }
     }, [ptr.allPhotos])
-
+    
     return (
         <div>
-            {/* <LogoBar /> */}
+            <LogoBar />
+            <Seo title={ptr.titleOfPost} />
             <div className="container text-center mt-4">
                 <div>
                     <h1 style={{}}>{ptr.titleOfPost}</h1>
@@ -44,7 +45,8 @@ const Contenful = (prop) => {
     )
 }
 
-export default Contenful;
+
+export default Contentful;
 
 export const query = graphql`
     query ($slug: String) {
