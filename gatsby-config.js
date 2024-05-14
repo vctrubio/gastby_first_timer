@@ -17,7 +17,7 @@ module.exports = {
     title: `Alicia Agosti`,
     description: `Interiosismo de lujo en Madrid. `,
     author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    siteUrl: `https://66433dbdf947a70008cb5616--aliciaagosti.netlify.app/`,
   },
   plugins: [
     `gatsby-plugin-image`,
