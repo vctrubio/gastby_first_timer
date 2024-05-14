@@ -2,8 +2,6 @@ import * as React from "react"
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-import { LogoBar } from "./index"
-
 const Contenful = (prop) => {
 
     //isLoading state

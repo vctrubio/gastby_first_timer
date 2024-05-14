@@ -34,14 +34,32 @@ export const LogoBar = ({ setActiveComponent }) => {
     </div>
   );
 };
+
 const NavBar = ({ setActiveComponent, nodes }) => {
-  const [isHovered, setIsHovered] = useState(true);
+  let titlesOfPost = [];
+
+  nodes.map(({ node }) => {
+    titlesOfPost.push(node.titleOfPost)
+  })
+
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="navbar">
       <div onClick={() => setActiveComponent("banner")}>About</div>
-      <div onClick={() => setActiveComponent("portfolio")}>
+      <div onClick={() => setActiveComponent("portfolio")}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        >
         Portfolio
       </div>
+      {isHovered &&
+        <div className="dropdown"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        >
+          {titlesOfPost.map((item, index) => <div key={index}>{item}</div>)}
+        </div>
+      }
       <div onClick={() => setActiveComponent("about")}>Info</div>
     </div>
   )
@@ -118,7 +136,7 @@ const Banner = () => {
       </div>
 
       <About />
-      
+
       <div className="d-flex justify-content-center">
         <BottomUps />
       </div>
