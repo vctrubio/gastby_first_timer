@@ -9,17 +9,20 @@
     margin: 20px;
     cursor: pointer;
     border-radius: 4px;
-
+    opacity: 0.4;
+    color: rgba(0, 0, 0, 1); /* Opacity for the text */
+    font-size: 44px;
 }
 
 .card-portfolio:hover {
-    border: 4px solid rgb(68, 61, 61);
-    transition: border-width 0.1s linear;
+    transition: ease-out 1s;
+    font-weight: bold;
+    opacity: 1;
 }
 
 
-.bu{
-    width: 520px;
-    height: 480px;
+.bu {
+    width: 320px;
+    height: 380px;
     border: 1px dashed rgb(69, 67, 67);
 }

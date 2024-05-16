@@ -17,6 +17,8 @@ exports.onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
     />,
+    <meta key="theme-color" name="theme-color" content="#319197" />,
+
   ])
 }
 

@@ -1,17 +1,9 @@
 import * as React from "react"
-import { useState } from 'react';
-
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import './card.css'
 
-
-export const Card = ({ title, description, coverUrl }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
+export const Card = ({ title, coverUrl }) => {
     return (
         <div
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             style={{
                 position: 'relative',
                 backgroundImage: `url(${coverUrl})`,
@@ -20,9 +12,7 @@ export const Card = ({ title, description, coverUrl }) => {
             }}
             className="card-portfolio"
         >
-            <h3 style={{color: 'white'}}>{title}</h3>
-            {/* {isHovered && <p>{description}</p>} */}
-
+            <dst>{title}</dst>
         </div>
     )
 }

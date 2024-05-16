@@ -15,8 +15,8 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Alicia Agosti`,
-    description: `Interiosismo de lujo en Madrid. `,
-    author: `@gatsbyjs`,
+    description: `Interiosismo de lujo en Madrid. Proyectos de interiorismo en España. Diseño de interiores en Madrid.`,
+    author: `Alicia Agosti`,
     siteUrl: `https://66433dbdf947a70008cb5616--aliciaagosti.netlify.app/`,
   },
   plugins: [
@@ -33,18 +33,15 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Alicia Agosti Interiorismo Madrid Lujo España`,
+        short_name: `Alicia Agosti Interiorismo`,
         start_url: `/`,
         background_color: `#663399`,
-        // This will impact how browsers show your PWA/website
-        // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#663399`,
+        theme_color: `#319197`, // Specify your theme color here   // https://css-tricks.com/meta-theme-color-and-trickery/
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/aliagostiinteriorismo.png`
       },
     },
-    //added by me
     {
       resolve: "gatsby-source-contentful",
       options: {

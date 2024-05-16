@@ -20,15 +20,15 @@ export const LogoBar = ({ setActiveComponent }) => {
   return (
     <div className="d-flex justify-content-around" onClick={handleClick}>
       <StaticImage
-        src="../images/logo.webp"
+        src="../images/logoAA.webp"
         loading="eager"
-        width={182}
-        quality={95}
+        width={400}
+        quality={100}
+        //zoom into it a bit
         formats={["auto", "webp", "avif"]}
         alt="Alicia Agosti Interiorismo"
         style={{
-          marginBottom: `var(--space-1)`,
-          marginTop: `var(--space-3)`,
+          marginTop: `var(--space-1)`,
         }}
       />
     </div>
@@ -227,13 +227,12 @@ const IndexPage = ({ data }) => {
   console.log('data: ', data)
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', width: '100vw' }}>
       <LogoBar setActiveComponent={setActiveComponent} />
       <NavBar setActiveComponent={setActiveComponent} nodes={data.allContentfulAliciaContent.edges} />
       {activeComponent === "banner" && <Banner />}
       {activeComponent === "portfolio" && <PortfolioAll data={data} />}
       {activeComponent === "info" && <About />}
-
 
       <Footer />
     </div>
