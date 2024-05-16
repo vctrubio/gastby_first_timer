@@ -2,14 +2,23 @@ import * as React from "react"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { LogoBar } from "./index"
 
 const NotFoundPage = () => (
-  <Layout>
-    <h1>404: Not Found</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
+  <div>
+    <LogoBar />
+    <div className="text-center container mt-5">
+      <h1>
+        No podemos encontrar lo que buscas
+      </h1>
+      <h2>Contact FORM</h2>
+      <p>gmail</p>
+      <p>phone</p>
+      <p>instagram</p>
+    </div>
+  </div>
 )
 
-export const Head = () => <Seo title="404: Not Found" />
+export const Head = () => <Seo title="404" />
 
 export default NotFoundPage

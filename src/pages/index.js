@@ -6,7 +6,7 @@ import Seo from "../components/seo"
 import "../components/layout_customs.css"
 import { Card } from "../components/card"
 import { Footer } from "../components/footer";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 export const LogoBar = ({ setActiveComponent }) => {
   const handleClick = () => {
@@ -36,13 +36,12 @@ export const LogoBar = ({ setActiveComponent }) => {
 };
 
 const NavBar = ({ setActiveComponent, nodes, searchTerm, setSearchTerm }) => {
+  const [isHovered, setIsHovered] = useState(false);
   let titlesOfPost = [];
 
   nodes.map(({ node }) => {
     titlesOfPost.push(node.titleOfPost)
   })
-
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -51,9 +50,7 @@ const NavBar = ({ setActiveComponent, nodes, searchTerm, setSearchTerm }) => {
       setActiveComponent('portfolio');
     else
       setActiveComponent('banner')
-
     //hit enter and set the result[0] to the active component
-    
   };
 
   return (
@@ -69,9 +66,9 @@ const NavBar = ({ setActiveComponent, nodes, searchTerm, setSearchTerm }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="dropdown-toggle"
-
       >
       </div>
+
       {isHovered &&
         <div className="dropdown"
           onMouseEnter={() => setIsHovered(true)}
