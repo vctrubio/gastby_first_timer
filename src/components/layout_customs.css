@@ -26,8 +26,7 @@
     justify-content: center;
     position: absolute;
     background-color: #f9f9f9;
-    width: 90vw; /*100%*/
-    
+    width: 89%; /*100%*/
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     top: 20px;
@@ -44,39 +43,20 @@
     }
 }
 
-
-.about-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
-    >* {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        flex-direction: column;
-        cursor: help;
-    }
-}
-
-.about-component {
-    display: flex;
-    flex-direction: row;
-
-    >* {
-        margin: 10px;
-        cursor: pointer;
-    }
-}
-
-.portfolio-all {
+.dropdown2 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 89%; /*100%*/
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    top: 20px;
+    margin-top: 20px;
 
-    width: 100%;
-    overflow-x: scroll;
+    
+    border-radius: 10px;
 }
 
 @media (max-width: 768px) {

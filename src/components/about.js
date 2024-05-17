@@ -1,7 +1,11 @@
 import React from 'react';
+import './about.css'
+import { Seo } from './seo';
 
 export const About = () => {
-    return (
+
+  return (
+    <>
       <div className="about-main" style={{ marginBottom: '4em' }}>
         <div>
           <h1 style={{ marginBottom: '0' }}>¿Que hacemos?</h1>
@@ -22,6 +26,6 @@ export const About = () => {
           </div>
         </div>
       </div>
-    )
-  }
-  
+    </>
+  )
+}

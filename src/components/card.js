@@ -1,5 +1,5 @@
 import * as React from "react"
-import './card.css'
+import './card_portfolio.css'
 
 export const Card = ({ title, coverUrl }) => {
     return (
@@ -16,3 +16,4 @@ export const Card = ({ title, coverUrl }) => {
         </div>
     )
 }
+                                

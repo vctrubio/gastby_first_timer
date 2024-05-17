@@ -4,6 +4,7 @@ import { StaticImage } from "gatsby-plugin-image"
 
 export const Banner = () => {
 
+    //setSeoTitlw to Interiorismo
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div className="d-flex flex-column flex-md-row justify-content-center" style={{ marginBottom: '4em' }}>

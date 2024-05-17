@@ -9,10 +9,10 @@ import { LogoBar } from "../components/logobar";
 import { About } from "../components/about";
 import { ContenfulCard } from "../components/contenfulCard";
 import { Banner } from "../components/banner";
-import { SlideSwiper } from "../components/slideSwiper";
+import { SlideSwiper } from "../components/slideSwiper"
+import { act } from "react";
 
-
-const NavBar = ({ setActiveComponent, nodes }) => {
+const NavBar = ({ activeComponent, setActiveComponent, nodes }) => {
   let titlesOfPost = [];
 
   nodes.map(({ node }) => {
@@ -29,7 +29,7 @@ const NavBar = ({ setActiveComponent, nodes }) => {
       >
         Portfolio
       </div>
-      {isHovered &&
+      {isHovered && activeComponent !== "portfolio" &&
         <div className="dropdown"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -37,6 +37,12 @@ const NavBar = ({ setActiveComponent, nodes }) => {
           {titlesOfPost.map((item, index) => <div key={index}>{item}</div>)}
         </div>
       }
+      {
+        activeComponent.toLowerCase() === 'portfolio' && <div className="dropdown2">
+          <div> hola</div>
+        </div>
+      }
+
       <div onClick={() => setActiveComponent("about")}>Info</div>
     </div>
   )
@@ -83,25 +89,27 @@ const PortfolioAll = ({ data }) => {
 
 
 const IndexPage = ({ data }) => {
-  const [activeComponent, setActiveComponent] = useState("banner");
+  const [activeComponent, setActiveComponent] = useState("portfolio");
   const edges = data.allContentfulAliciaContent.edges
   console.log('init_load: ', data)
 
   return (
-    <div style={{ textAlign: 'center', width: '100vw' }}>
-      <LogoBar setActiveComponent={setActiveComponent} />
-      <NavBar setActiveComponent={setActiveComponent} nodes={edges} />
-      {activeComponent === "banner" && <SlideSwiper nodes={edges} />}
-      {activeComponent === "banner" && <Banner/>}
-      {activeComponent === "portfolio" && <PortfolioAll data={data} />}
-      {activeComponent === "info" && <About />}
+    <>
+      <Seo title={'Interiorismo'} />
 
-      <Footer />
-    </div>
+      <div style={{ textAlign: 'center', width: '100%', }}>
+        <LogoBar setActiveComponent={setActiveComponent} />
+        <NavBar activeComponent={activeComponent} setActiveComponent={setActiveComponent} nodes={edges} />
+        {activeComponent === "banner" && <SlideSwiper nodes={edges} />}
+        {activeComponent === "banner" && <Banner />}
+        {activeComponent === "portfolio" && <PortfolioAll data={data} />}
+        {activeComponent === "info" && <About />}
+
+        <Footer />
+      </div>
+    </>
   )
 }
-
-export const Head = () => <Seo title="Interiorismo" />
 
 export default IndexPage
 

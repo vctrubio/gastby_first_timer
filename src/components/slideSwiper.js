@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay, EffectCoverflow } from 'swiper';
+import SwiperCore, { Autoplay, EffectCoverflow } from 'swiper/core';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-coverflow';
+
 
 export const SlideSwiper = ({nodes}) => {
   SwiperCore.use([Autoplay, EffectCoverflow]);
@@ -40,9 +40,9 @@ export const SlideSwiper = ({nodes}) => {
         slidesPerView={2}
         grabCursor={true}
         centeredSlides={true}
-        // autoplay={{ delay: 2500, disableOnInteraction: false }}
+        autoplay={{ delay: 205, disableOnInteraction: false }}
         initialSlide={initialActiveIndex}
-        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)} // Update activeIndex on slide change
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
       >
         {imgs_url.map((url, index) => (
           <SwiperSlide
@@ -50,9 +50,9 @@ export const SlideSwiper = ({nodes}) => {
             onClick={() => handleClick(index)}
             style={{
               display: 'flex',
-              alignItems: 'center', // Center children vertically
-              justifyContent: 'center', // Center children horizontally
-              height: '100%', // Take full height
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100%',
             }}
           >
             <img
@@ -60,7 +60,7 @@ export const SlideSwiper = ({nodes}) => {
               alt={`Slide ${index}`}
               style={{
                 verticalAlign: 'baseline',
-                height: activeIndex === index ? '50vh' : '100%',
+                height: activeIndex === index ? '59vh' : '100%',
                 width: activeIndex === index ? '100%' : '80%',
                 objectFit: 'cover',
                 opacity: activeIndex === index ? 1 : 0.2,

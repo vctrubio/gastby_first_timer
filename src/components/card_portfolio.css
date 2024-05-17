@@ -10,19 +10,24 @@
     cursor: pointer;
     border-radius: 4px;
     opacity: 0.4;
-    color: rgba(0, 0, 0, 1); /* Opacity for the text */
+    color: rgba(0, 0, 0, 0); /* Opacity for the text */
     font-size: 44px;
+    
 }
 
 .card-portfolio:hover {
     transition: ease-out 1s;
     font-weight: bold;
     opacity: 1;
+    color: rgba(0, 0, 0, 1); /* Opacity for the text */
 }
 
+.portfolio-all {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 
-.bu {
-    width: 320px;
-    height: 380px;
-    border: 1px dashed rgb(69, 67, 67);
+    width: 100%;
+    overflow-x: scroll;
 }
