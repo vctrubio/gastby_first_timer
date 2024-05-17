@@ -8,6 +8,8 @@ import { Footer } from "../components/footer";
 import { LogoBar } from "../components/logobar";
 import { About } from "../components/about";
 import { ContenfulCard } from "../components/contenfulCard";
+import { Banner } from "../components/banner";
+import { SlideSwiper } from "../components/slideSwiper";
 
 
 const NavBar = ({ setActiveComponent, nodes }) => {
@@ -24,13 +26,13 @@ const NavBar = ({ setActiveComponent, nodes }) => {
       <div onClick={() => setActiveComponent("portfolio")}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        >
+      >
         Portfolio
       </div>
       {isHovered &&
         <div className="dropdown"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           {titlesOfPost.map((item, index) => <div key={index}>{item}</div>)}
         </div>
@@ -40,23 +42,6 @@ const NavBar = ({ setActiveComponent, nodes }) => {
   )
 }
 
-
-
-const BottomUps = (data) => {
-  return (
-    <div className="bu">
-      {/* <h1>Bottom ups</h1>
-      <div className="d-flex justify-content-around">
-        {data.map((item) => (
-          <div key={item.id}>
-            <GatsbyImage image={getImage(item.allPhotos[0])} alt={item.titleOfPost} />
-            <p>{item.titleOfPost}</p>
-          </div>
-        ))}
-      </div> */}
-    </div>
-  )
-}
 
 const PortfolioAll = ({ data }) => {
   const [contentfulTmp, setContentfulTmp] = useState(null);
@@ -99,19 +84,18 @@ const PortfolioAll = ({ data }) => {
 
 const IndexPage = ({ data }) => {
   const [activeComponent, setActiveComponent] = useState("banner");
+  const edges = data.allContentfulAliciaContent.edges
   console.log('init_load: ', data)
 
-  
   return (
     <div style={{ textAlign: 'center', width: '100vw' }}>
       <LogoBar setActiveComponent={setActiveComponent} />
-      <NavBar setActiveComponent={setActiveComponent} nodes={data.allContentfulAliciaContent.edges} />
-      {activeComponent === "banner" && <Banner />}
+      <NavBar setActiveComponent={setActiveComponent} nodes={edges} />
+      {activeComponent === "banner" && <SlideSwiper nodes={edges} />}
+      {activeComponent === "banner" && <Banner/>}
       {activeComponent === "portfolio" && <PortfolioAll data={data} />}
       {activeComponent === "info" && <About />}
 
-
-      <BottomUps/>
       <Footer />
     </div>
   )

@@ -22,6 +22,21 @@
     }
 }
 
+.swiper {
+    width: 95%;
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 auto;
+    
+    *> {
+        vertical-align: baseline;
+        justify-content: baseline;
+    }
+  }
+
+  
 .dropdown {
     display: block;
     position: absolute;

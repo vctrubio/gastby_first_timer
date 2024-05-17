@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const About = () => {
     return (
       <div className="about-main" style={{ marginBottom: '4em' }}>
