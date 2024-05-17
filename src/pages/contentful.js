@@ -1,6 +1,7 @@
 import * as React from "react"
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { LogoBar } from "../components/logobar";
 
 const Contenful = (prop) => {
 
@@ -17,7 +18,8 @@ const Contenful = (prop) => {
 
     return (
         <div>
-            {/* <LogoBar /> */}
+            <LogoBar />
+            <p style={{textAlign: 'center', marginTop: '1em'}}>Mas pouede ir aqui</p>
             <div className="container text-center mt-4">
                 <div>
                     <h1 style={{}}>{ptr.titleOfPost}</h1>

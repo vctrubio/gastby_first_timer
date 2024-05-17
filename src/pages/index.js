@@ -12,12 +12,16 @@ import { Banner } from "../components/banner";
 import { SlideSwiper } from "../components/slideSwiper"
 import { act } from "react";
 
-const NavBar = ({ activeComponent, setActiveComponent, nodes }) => {
+const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSearchTerm }) => {
   let titlesOfPost = [];
 
   nodes.map(({ node }) => {
     titlesOfPost.push(node.titleOfPost)
   })
+
+  const handleSearchChange = event => {
+    setSearchTerm(event.target.value);
+  };
 
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -39,7 +43,7 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes }) => {
       }
       {
         activeComponent.toLowerCase() === 'portfolio' && <div className="dropdown2">
-          <div> hola</div>
+         <input value={searchTerm} onChange={handleSearchChange} placeholder="Search"></input>
         </div>
       }
 
@@ -49,41 +53,52 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes }) => {
 }
 
 
-const PortfolioAll = ({ data }) => {
+const PortfolioAll = ({ data, searchTerm, setSearchTerm}) => {
   const [contentfulTmp, setContentfulTmp] = useState(null);
-  const posts = data.allContentfulAliciaContent.edges;
+  const [filteredPosts, setFilteredPosts] = useState(data.allContentfulAliciaContent.edges);
+
+  React.useEffect(() => {
+      const posts = data.allContentfulAliciaContent.edges;
+
+      if (searchTerm.length > 0) {
+          setFilteredPosts(posts.filter(({ node }) => node.titleOfPost.toLowerCase().includes(searchTerm.toLowerCase())));
+      } else {
+          setFilteredPosts(posts);
+      }
+  }, [searchTerm, data]);
 
   const handleCardClick = (cardData) => {
-    setContentfulTmp(cardData);
+      setSearchTerm('');
+      setContentfulTmp(cardData);
   };
 
   const PostView = ({ posts }) => {
-    return (
-      posts.map(({ node }) => (
-        <div key={node.id} onClick={() => handleCardClick(node)}>
-          <Card
-            title={node.titleOfPost}
-            description={node.descriptionOfPost.descriptionOfPost}
-            coverUrl={node.allPhotos[0].file.url}
-          />
-        </div>
-      ))
-    );
+      return (
+          filteredPosts.map(({ node }) => (
+              <div key={node.id} onClick={() => handleCardClick(node)}>
+                  <Card
+                      title={node.titleOfPost}
+                      description={node.descriptionOfPost.descriptionOfPost}
+                      coverUrl={node.allPhotos[0].file.url}
+                  />
+              </div>
+          ))
+      );
   };
 
   return (
-    <div className="portfolio-all">
-      {contentfulTmp ? (
-        <div className="d-flex flex-column">
-          <ContenfulCard data={contentfulTmp} />
-          <button onClick={() => setContentfulTmp(false)} style={{ border: '1px solid black' }}>
-            back
-          </button>
-        </div>
-      ) : (
-        <PostView posts={posts} />
-      )}
-    </div>
+      <div className="portfolio-all">
+          {contentfulTmp ? (
+              <div className="d-flex flex-column">
+                  <ContenfulCard data={contentfulTmp} />
+                  <button onClick={() => setContentfulTmp(false)} style={{ border: '1px solid black' }}>
+                      back
+                  </button>
+              </div>
+          ) : (
+              <PostView posts={filteredPosts} />
+          )}
+      </div>
   )
 }
 
@@ -91,6 +106,7 @@ const PortfolioAll = ({ data }) => {
 const IndexPage = ({ data }) => {
   const [activeComponent, setActiveComponent] = useState("portfolio");
   const edges = data.allContentfulAliciaContent.edges
+  const [searchTerm, setSearchTerm] = useState('');
   console.log('init_load: ', data)
 
   return (
@@ -99,10 +115,10 @@ const IndexPage = ({ data }) => {
 
       <div style={{ textAlign: 'center', width: '100%', }}>
         <LogoBar setActiveComponent={setActiveComponent} />
-        <NavBar activeComponent={activeComponent} setActiveComponent={setActiveComponent} nodes={edges} />
+        <NavBar activeComponent={activeComponent} setActiveComponent={setActiveComponent} nodes={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         {activeComponent === "banner" && <SlideSwiper nodes={edges} />}
         {activeComponent === "banner" && <Banner />}
-        {activeComponent === "portfolio" && <PortfolioAll data={data} />}
+        {activeComponent === "portfolio" && <PortfolioAll data={data} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />}
         {activeComponent === "info" && <About />}
 
         <Footer />
