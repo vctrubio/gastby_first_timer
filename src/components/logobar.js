@@ -15,13 +15,13 @@ export const LogoBar = ({ setActiveComponent }) => {
         <StaticImage
           src="../images/logoAA.webp"
           loading="eager"
-          width={400}
+          width={'100%'}
           quality={100}
-          //zoom into it a bit
           formats={["auto", "webp", "avif"]}
           alt="Alicia Agosti Interiorismo"
           style={{
-            marginTop: `var(--space-1)`,
+            marginTop: '2.5em',
+            transform: 'scale(1.4)',
           }}
         />
       </div>

@@ -1,12 +1,11 @@
 import React from 'react';
 import { About } from "./about"
 import { StaticImage } from "gatsby-plugin-image"
-import { SlideSwiper } from './slideSwiper';
 
 export const Banner = () => {
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div className="d-flex flex-column flex-md-row justify-content-center" style={{ marginBottom: '4em' }}>
   
           <div className="w-md-50 mx-md-3" style={{ minWidth: '380px' }}>

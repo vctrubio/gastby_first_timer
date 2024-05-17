@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, EffectCoverflow } from 'swiper';
 import 'swiper/css';
@@ -33,7 +32,7 @@ export const SlideSwiper = ({nodes}) => {
   
 
   return (
-    <div className="d-flex flex-start" style={{ marginBottom: '8em'}}>
+    <div className="d-flex flex-start" style={{ marginBottom: '6em', paddingTop: '1.4em'}}>
       <Swiper
         style={{ width: '85%' }}
         spaceBetween={0}
