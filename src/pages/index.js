@@ -43,7 +43,16 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
       }
       {
         activeComponent.toLowerCase() === 'portfolio' && <div className="dropdown2">
-         <input value={searchTerm} onChange={handleSearchChange} placeholder="Search"></input>
+          <div className="d-flex flex-row justify-content-end">
+            <div className="me-3"> name1 </div>
+            <div className="me-3"> name2 </div>
+            <div className="m3-3"> name3 </div>
+          </div>
+          <div className="d-flex flex-row justify-content-end">
+            <div className="ms-3">[back btn]</div>
+            <input value={searchTerm} onChange={handleSearchChange} placeholder="Search"></input>
+            <div className="ms-3">|||</div>
+          </div>
         </div>
       }
 
@@ -53,52 +62,52 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
 }
 
 
-const PortfolioAll = ({ data, searchTerm, setSearchTerm}) => {
+const PortfolioAll = ({ data, searchTerm, setSearchTerm }) => {
   const [contentfulTmp, setContentfulTmp] = useState(null);
   const [filteredPosts, setFilteredPosts] = useState(data.allContentfulAliciaContent.edges);
 
   React.useEffect(() => {
-      const posts = data.allContentfulAliciaContent.edges;
+    const posts = data.allContentfulAliciaContent.edges;
 
-      if (searchTerm.length > 0) {
-          setFilteredPosts(posts.filter(({ node }) => node.titleOfPost.toLowerCase().includes(searchTerm.toLowerCase())));
-      } else {
-          setFilteredPosts(posts);
-      }
+    if (searchTerm.length > 0) {
+      setFilteredPosts(posts.filter(({ node }) => node.titleOfPost.toLowerCase().includes(searchTerm.toLowerCase())));
+    } else {
+      setFilteredPosts(posts);
+    }
   }, [searchTerm, data]);
 
   const handleCardClick = (cardData) => {
-      setSearchTerm('');
-      setContentfulTmp(cardData);
+    setSearchTerm('');
+    setContentfulTmp(cardData);
   };
 
   const PostView = ({ posts }) => {
-      return (
-          filteredPosts.map(({ node }) => (
-              <div key={node.id} onClick={() => handleCardClick(node)}>
-                  <Card
-                      title={node.titleOfPost}
-                      description={node.descriptionOfPost.descriptionOfPost}
-                      coverUrl={node.allPhotos[0].file.url}
-                  />
-              </div>
-          ))
-      );
+    return (
+      filteredPosts.map(({ node }) => (
+        <div key={node.id} onClick={() => handleCardClick(node)}>
+          <Card
+            title={node.titleOfPost}
+            description={node.descriptionOfPost.descriptionOfPost}
+            coverUrl={node.allPhotos[0].file.url}
+          />
+        </div>
+      ))
+    );
   };
 
   return (
-      <div className="portfolio-all">
-          {contentfulTmp ? (
-              <div className="d-flex flex-column">
-                  <ContenfulCard data={contentfulTmp} />
-                  <button onClick={() => setContentfulTmp(false)} style={{ border: '1px solid black' }}>
-                      back
-                  </button>
-              </div>
-          ) : (
-              <PostView posts={filteredPosts} />
-          )}
-      </div>
+    <div className="portfolio-all">
+      {contentfulTmp ? (
+        <div className="d-flex flex-column">
+          <ContenfulCard data={contentfulTmp} />
+          <button onClick={() => setContentfulTmp(false)} style={{ border: '1px solid black' }}>
+            back
+          </button>
+        </div>
+      ) : (
+        <PostView posts={filteredPosts} />
+      )}
+    </div>
   )
 }
 

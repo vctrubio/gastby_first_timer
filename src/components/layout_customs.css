@@ -61,7 +61,8 @@
     border-radius: 10px;
 
     >* {
-        text-align: center;
+        width: 100%;
+        align-items: baseline;
     }
 }
 
