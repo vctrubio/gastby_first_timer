@@ -23,7 +23,6 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
     if (contentfulTmp) setContentfulTmp(false)
   };
 
-
   const getCardbyItem = (item) => {
     let card = nodes.filter(({ node }) => node.title === item);
     setContentfulTmp(card[0].node);
@@ -74,7 +73,6 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
 
 
 const PortfolioAll = ({ edges, searchTerm, setSearchTerm, contentfulTmp, setContentfulTmp }) => {
-
   const [filteredPosts, setFilteredPosts] = useState(edges);
 
   React.useEffect(() => {
@@ -90,7 +88,6 @@ const PortfolioAll = ({ edges, searchTerm, setSearchTerm, contentfulTmp, setCont
     setContentfulTmp(cardData);
   };
 
-
   const getTitleOpacity = () => {
     if (searchTerm.length > 0 || window.innerWidth < 768) {
       return "title-opacity";
@@ -98,9 +95,7 @@ const PortfolioAll = ({ edges, searchTerm, setSearchTerm, contentfulTmp, setCont
     return "";
   }
 
-
   const PostView = () => {
-
     return (
       filteredPosts.length > 0 ?
         filteredPosts.map(({ node }) => (
@@ -147,10 +142,6 @@ const IndexPage = ({ data }) => {
   const imgs_url = data.allContentfulAliHome.nodes.flatMap(node =>
     node.fotos.map(foto => foto.file.url)
   );
-
-  console.log('init_load: ', data)
-  window.data = data
-  window.edges = edges
 
   return (
     <>
