@@ -1,10 +1,10 @@
 .navbar {
     justify-content: center !important;
     padding: 0;
-    margin-bottom: 3em !important;
+    margin-bottom: 20px;
 
     >* {
-        margin: 0 10px 0 2px;
+        margin: 0 20px 0 20px;
         padding: 10px;
         cursor: pointer;
     }
@@ -38,7 +38,7 @@
     >* {
         margin: 0 10px;
         cursor: pointer;
-        border-bottom: 1px solid black;
+        /* border-bottom: 1px solid black; */
         font-weight: normal;
         padding: 4px;
     }
@@ -100,7 +100,7 @@
 }
 
 @media (max-width: 768px) {
-    .about-component {
-        flex-direction: column;
+    .dropdown2 {
+        display: none;
     }
 }

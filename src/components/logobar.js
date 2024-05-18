@@ -15,11 +15,12 @@ export const LogoBar = ({ setActiveComponent }) => {
         <StaticImage
           src="../images/logoAA.webp"
           loading="eager"
-          width={'100%'}
+          width={400}
           quality={100}
           formats={["auto", "webp"]}
           alt="Alicia Agosti Interiorismo"
           style={{
+            width: '300px',
             marginTop: '2em',
             transform: 'scale(1.4)',
           }}

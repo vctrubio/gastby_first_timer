@@ -25,3 +25,9 @@
     }
 }
 
+
+@media (max-width: 768px) {
+    .about-component {
+        flex-direction: column;
+    }
+}

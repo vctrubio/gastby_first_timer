@@ -40,20 +40,17 @@ exports.createPages = async ({ graphql, actions }) => {
     console.log('error: please check exports.createPage, ', result.errors)
     throw new Error(result.errors)
   }
-  else
-  {
-    console.log('hip hip hoooray')
-  }
 
-  // result.data?.allContentfulAliciaInterior.edges.forEach(({ node }) => {
-  //   console.log('url:::: ', node.url)
-  //   createPage({
-  //     path: `/${node.url}`,
-  //     component: require.resolve("./src/pages/contentful.js"),
-  //     context: {
-  //       url: node.url,
-  //     },
-  //     defer: true,
-  //   })
-  // })
+
+  result.data?.allContentfulAliciaInterior.edges.forEach(({ node }) => {
+    console.log('url:::: ', node.url)
+    createPage({
+      path: `/${node.url}`,
+      component: require.resolve("./src/pages/contentful.js"),
+      context: {
+        url: node.url,
+      },
+      defer: true,
+    })
+  })
 }

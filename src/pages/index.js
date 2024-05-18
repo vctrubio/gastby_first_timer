@@ -13,7 +13,16 @@ import { SlideSwiper } from "../components/slideSwiper"
 
 const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSearchTerm, setContentfulTmp, contentfulTmp }) => {
   const [isHovered, setIsHovered] = useState(false);
-  let titlesOfPost = nodes.map(({ node }) => node.title)
+
+  let titlesOfPost = nodes.map(({ node }) => {
+    let originalTitle = node.title;
+    let words = node.title.toLowerCase().split(' ');
+    for (let i = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].substring(1);
+    }
+    let camelCaseTitle = words.join(' ');
+    return { originalTitle, camelCaseTitle };
+  });
 
   const handleSearchChange = event => {
     setSearchTerm(event.target.value);
@@ -47,10 +56,11 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
         <div className="dropdown"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={() => setIsHovered(false)}
         >
           {titlesOfPost.map((item, index) =>
-            <div key={index} onClick={() => getCardbyItem(item)}>
-              {item}</div>)}
+            <div key={index} onClick={() => getCardbyItem(item.originalTitle)}>
+              {item.camelCaseTitle}</div>)}
         </div>
       }
       {
