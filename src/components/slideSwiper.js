@@ -49,7 +49,7 @@ export const SlideSwiper = ({imgs_url}) => {
               alt={`Slide ${index}`}
               style={{
                 verticalAlign: 'baseline',
-                height: activeIndex === index ? '59vh' : '100%',
+                height: activeIndex === index ? '52vh' : '100%',
                 width: activeIndex === index ? '100%' : '80%',
                 objectFit: 'cover',
                 opacity: activeIndex === index ? 1 : 0.2,
