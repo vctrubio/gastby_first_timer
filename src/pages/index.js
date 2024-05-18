@@ -12,22 +12,34 @@ import { Banner } from "../components/banner";
 import { SlideSwiper } from "../components/slideSwiper"
 import { act } from "react";
 
-const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSearchTerm }) => {
-  let titlesOfPost = [];
-
-  nodes.map(({ node }) => {
-    titlesOfPost.push(node.titleOfPost)
-  })
+const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSearchTerm, setContentfulTmp, contentfulTmp }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  let titlesOfPost = nodes.map(({ node }) => node.titleOfPost)
 
   const handleSearchChange = event => {
     setSearchTerm(event.target.value);
+    if (event.target.value.length > 0) {
+      setActiveComponent('portfolio')
+    }
+    if (contentfulTmp) setContentfulTmp(false)
   };
 
-  const [isHovered, setIsHovered] = useState(false);
+
+  const getCardbyItem = (item) => {
+    let card = nodes.filter(({ node }) => node.titleOfPost === item);
+    setContentfulTmp(card[0].node);
+    setActiveComponent('portfolio')
+  }
+
+  const setPortfolioActive = () => {
+    setActiveComponent('portfolio')
+    setContentfulTmp(false)
+  }
+
   return (
     <div className="navbar">
       <div onClick={() => setActiveComponent("banner")}>About</div>
-      <div onClick={() => setActiveComponent("portfolio")}
+      <div onClick={() => setPortfolioActive()}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -38,21 +50,15 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {titlesOfPost.map((item, index) => <div key={index}>{item}</div>)}
+          {titlesOfPost.map((item, index) =>
+            <div key={index} onClick={() => getCardbyItem(item)}>
+              {item}</div>)}
         </div>
       }
       {
         activeComponent.toLowerCase() === 'portfolio' && <div className="dropdown2">
-          <div className="d-flex flex-row justify-content-end">
-            <div className="me-3"> name1 </div>
-            <div className="me-3"> name2 </div>
-            <div className="m3-3"> name3 </div>
-          </div>
-          <div className="d-flex flex-row justify-content-end">
-            <div className="ms-3">[back btn]</div>
-            <input value={searchTerm} onChange={handleSearchChange} placeholder="Search"></input>
-            <div className="ms-3">|||</div>
-          </div>
+          <input className='search-bar' value={searchTerm} onChange={handleSearchChange} placeholder="que buscas?"></input>
+          <div className="ms-3">|||</div>
         </div>
       }
 
@@ -62,8 +68,7 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
 }
 
 
-const PortfolioAll = ({ data, searchTerm, setSearchTerm }) => {
-  const [contentfulTmp, setContentfulTmp] = useState(null);
+const PortfolioAll = ({ data, searchTerm, setSearchTerm, setActiveComponen, contentfulTmp, setContentfulTmp }) => {
   const [filteredPosts, setFilteredPosts] = useState(data.allContentfulAliciaContent.edges);
 
   React.useEffect(() => {
@@ -81,17 +86,29 @@ const PortfolioAll = ({ data, searchTerm, setSearchTerm }) => {
     setContentfulTmp(cardData);
   };
 
-  const PostView = ({ posts }) => {
+
+  const getTitleOpacity = () => {
+    if (searchTerm.length > 0 || window.innerWidth < 768) {
+      return "title-opacity";
+    }
+    return "";
+  }
+
+
+  const PostView = () => {
+
     return (
-      filteredPosts.map(({ node }) => (
-        <div key={node.id} onClick={() => handleCardClick(node)}>
-          <Card
-            title={node.titleOfPost}
-            description={node.descriptionOfPost.descriptionOfPost}
-            coverUrl={node.allPhotos[0].file.url}
-          />
-        </div>
-      ))
+      filteredPosts.length > 0 ?
+        filteredPosts.map(({ node }) => (
+          <div key={node.id} onClick={() => handleCardClick(node)}>
+            <Card
+              title={<div className={getTitleOpacity()}>{node.titleOfPost}</div>}
+              coverUrl={node.allPhotos[0].file.url}
+            />
+          </div>
+        ))
+        :
+        <h2 style={{ padding: '12px' }}>No encontramos lo que buscas</h2>
     );
   };
 
@@ -116,6 +133,8 @@ const IndexPage = ({ data }) => {
   const [activeComponent, setActiveComponent] = useState("portfolio");
   const edges = data.allContentfulAliciaContent.edges
   const [searchTerm, setSearchTerm] = useState('');
+  const [contentfulTmp, setContentfulTmp] = useState(null);
+
   console.log('init_load: ', data)
 
   return (
@@ -124,10 +143,10 @@ const IndexPage = ({ data }) => {
 
       <div style={{ textAlign: 'center', width: '100%', }}>
         <LogoBar setActiveComponent={setActiveComponent} />
-        <NavBar activeComponent={activeComponent} setActiveComponent={setActiveComponent} nodes={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <NavBar activeComponent={activeComponent} setActiveComponent={setActiveComponent} nodes={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setContentfulTmp={setContentfulTmp} contentfulTmp={contentfulTmp} />
         {activeComponent === "banner" && <SlideSwiper nodes={edges} />}
         {activeComponent === "banner" && <Banner />}
-        {activeComponent === "portfolio" && <PortfolioAll data={data} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />}
+        {activeComponent === "portfolio" && <PortfolioAll data={data} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setActiveComponent={setActiveComponent} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
         {activeComponent === "info" && <About />}
 
         <Footer />
