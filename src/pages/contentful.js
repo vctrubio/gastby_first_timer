@@ -1,6 +1,5 @@
 import * as React from "react"
 import { graphql } from 'gatsby'
-import { GatsbyImage } from "gatsby-plugin-image";
 import { LogoBar } from "../components/logobar";
 import { ContenfulCard } from "../components/contenfulCard";
 
