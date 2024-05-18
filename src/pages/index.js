@@ -10,11 +10,10 @@ import { About } from "../components/about";
 import { ContenfulCard } from "../components/contenfulCard";
 import { Banner } from "../components/banner";
 import { SlideSwiper } from "../components/slideSwiper"
-import { act } from "react";
 
 const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSearchTerm, setContentfulTmp, contentfulTmp }) => {
   const [isHovered, setIsHovered] = useState(false);
-  let titlesOfPost = nodes.map(({ node }) => node.titleOfPost)
+  let titlesOfPost = nodes.map(({ node }) => node.title)
 
   const handleSearchChange = event => {
     setSearchTerm(event.target.value);
@@ -26,7 +25,7 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
 
 
   const getCardbyItem = (item) => {
-    let card = nodes.filter(({ node }) => node.titleOfPost === item);
+    let card = nodes.filter(({ node }) => node.title === item);
     setContentfulTmp(card[0].node);
     setActiveComponent('portfolio')
   }
@@ -45,7 +44,7 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
       >
         Portfolio
       </div>
-      {isHovered && activeComponent !== "portfolio" &&
+      {isHovered &&
         <div className="dropdown"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -56,8 +55,14 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
         </div>
       }
       {
-        activeComponent.toLowerCase() === 'portfolio' && <div className="dropdown2">
-          <input className='search-bar' value={searchTerm} onChange={handleSearchChange} placeholder="que buscas?"></input>
+        (activeComponent === 'portfolio') && <div className="dropdown2">
+          <div onClick={() => setContentfulTmp(false)} style={{ marginRight: '8px' }} >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
+              <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466" />
+            </svg>
+          </div>
+          <input className='search-bar' value={searchTerm} onChange={handleSearchChange} placeholder="cual buscas?"></input>
           <div className="ms-3">|||</div>
         </div>
       }
@@ -68,18 +73,17 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
 }
 
 
-const PortfolioAll = ({ data, searchTerm, setSearchTerm, setActiveComponen, contentfulTmp, setContentfulTmp }) => {
-  const [filteredPosts, setFilteredPosts] = useState(data.allContentfulAliciaContent.edges);
+const PortfolioAll = ({ edges, searchTerm, setSearchTerm, contentfulTmp, setContentfulTmp }) => {
+
+  const [filteredPosts, setFilteredPosts] = useState(edges);
 
   React.useEffect(() => {
-    const posts = data.allContentfulAliciaContent.edges;
-
     if (searchTerm.length > 0) {
-      setFilteredPosts(posts.filter(({ node }) => node.titleOfPost.toLowerCase().includes(searchTerm.toLowerCase())));
+      setFilteredPosts(edges.filter(({ node }) => node.title.toLowerCase().includes(searchTerm.toLowerCase())));
     } else {
-      setFilteredPosts(posts);
+      setFilteredPosts(edges);
     }
-  }, [searchTerm, data]);
+  }, [searchTerm, edges]);
 
   const handleCardClick = (cardData) => {
     setSearchTerm('');
@@ -102,8 +106,8 @@ const PortfolioAll = ({ data, searchTerm, setSearchTerm, setActiveComponen, cont
         filteredPosts.map(({ node }) => (
           <div key={node.id} onClick={() => handleCardClick(node)}>
             <Card
-              title={<div className={getTitleOpacity()}>{node.titleOfPost}</div>}
-              coverUrl={node.allPhotos[0].file.url}
+              title={<div className={getTitleOpacity()}>{node.title}</div>}
+              coverUrl={node.media[0].file.url}
             />
           </div>
         ))
@@ -115,10 +119,13 @@ const PortfolioAll = ({ data, searchTerm, setSearchTerm, setActiveComponen, cont
   return (
     <div className="portfolio-all">
       {contentfulTmp ? (
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column justify-content-center align-items-center">
           <ContenfulCard data={contentfulTmp} />
-          <button onClick={() => setContentfulTmp(false)} style={{ border: '1px solid black' }}>
-            back
+          <button className='back-btn' onClick={() => setContentfulTmp(false)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
+              <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466" />
+            </svg>
           </button>
         </div>
       ) : (
@@ -128,14 +135,22 @@ const PortfolioAll = ({ data, searchTerm, setSearchTerm, setActiveComponen, cont
   )
 }
 
+const getEdges = (data) => {
+  return data.data.allContentfulAliciaInterior.edges
+}
 
 const IndexPage = ({ data }) => {
-  const [activeComponent, setActiveComponent] = useState("portfolio");
-  const edges = data.allContentfulAliciaContent.edges
+  const [activeComponent, setActiveComponent] = useState("banner");
+  const edges = getEdges({ data })
   const [searchTerm, setSearchTerm] = useState('');
   const [contentfulTmp, setContentfulTmp] = useState(null);
+  const imgs_url = data.allContentfulAliHome.nodes.flatMap(node =>
+    node.fotos.map(foto => foto.file.url)
+  );
 
   console.log('init_load: ', data)
+  window.data = data
+  window.edges = edges
 
   return (
     <>
@@ -144,12 +159,12 @@ const IndexPage = ({ data }) => {
       <div style={{ textAlign: 'center', width: '100%', }}>
         <LogoBar setActiveComponent={setActiveComponent} />
         <NavBar activeComponent={activeComponent} setActiveComponent={setActiveComponent} nodes={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setContentfulTmp={setContentfulTmp} contentfulTmp={contentfulTmp} />
-        {activeComponent === "banner" && <SlideSwiper nodes={edges} />}
+        {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
         {activeComponent === "banner" && <Banner />}
-        {activeComponent === "portfolio" && <PortfolioAll data={data} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setActiveComponent={setActiveComponent} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
+        {activeComponent === "portfolio" && <PortfolioAll edges={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
         {activeComponent === "info" && <About />}
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   )
@@ -158,25 +173,34 @@ const IndexPage = ({ data }) => {
 export default IndexPage
 
 export const queryGL = graphql`
-  query MyQuery {
-    allContentfulAliciaContent {
-      edges {
-        node {
-          id
-          slug
-          titleOfPost
-          descriptionOfPost {
-            descriptionOfPost
+query MyQuery {
+  allContentfulAliciaInterior {
+    edges {
+      node {
+        media {
+          file {
+            url
           }
-          allPhotos {
-            id
-            file{
-              url
-            }
-            gatsbyImageData
-          }
+          gatsbyImageData
+        }
+        credits
+        description {
+          description
+        }
+        url
+        title
+      }
+    }
+  }
+  allContentfulAliHome {
+    nodes {
+      fotos {
+        gatsbyImageData
+        file {
+          url
         }
       }
     }
   }
+}
 `

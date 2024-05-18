@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay, EffectCoverflow } from 'swiper/core';
+import SwiperCore, { Autoplay} from 'swiper/core';
 import 'swiper/css';
 import 'swiper/css/autoplay';
-import 'swiper/css/effect-coverflow';
 
 
-export const SlideSwiper = ({nodes}) => {
-  SwiperCore.use([Autoplay, EffectCoverflow]);
-  const indexSpace = window.innerWidth < 768 ? 2 : 5;
-  
-  const imgs_url = [
-    'https://swiperjs.com/demos/images/nature-1.jpg',
-    'https://swiperjs.com/demos/images/nature-2.jpg',
-    'https://swiperjs.com/demos/images/nature-3.jpg',
-    'https://swiperjs.com/demos/images/nature-4.jpg',
-    'https://swiperjs.com/demos/images/nature-5.jpg',
-    'https://swiperjs.com/demos/images/nature-6.jpg'
-  ];
+export const SlideSwiper = ({imgs_url}) => {
+  SwiperCore.use([Autoplay]);
 
   const initialActiveIndex = Math.floor(imgs_url.length / 3); // Set initial active index
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex); // State to track active index
@@ -27,7 +16,7 @@ export const SlideSwiper = ({nodes}) => {
     if (swiper) {
       swiper.slideTo(index);
     }
-    setActiveIndex(index); // Update active index when a slide is clicked
+    setActiveIndex(index);
   };
   
 
@@ -40,7 +29,7 @@ export const SlideSwiper = ({nodes}) => {
         slidesPerView={2}
         grabCursor={true}
         centeredSlides={true}
-        autoplay={{ delay: 205, disableOnInteraction: false }}
+        // autoplay={{ delay: 205, disableOnInteraction: false }}
         initialSlide={initialActiveIndex}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
       >

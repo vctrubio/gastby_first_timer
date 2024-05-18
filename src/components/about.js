@@ -1,6 +1,5 @@
 import React from 'react';
 import './about.css'
-import { Seo } from './seo';
 
 export const About = () => {
 

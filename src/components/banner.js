@@ -15,7 +15,7 @@ export const Banner = () => {
               loading="lazy"
               width={380}
               quality={100}
-              formats={["auto", "webp", "avif"]}
+              formats={["auto", "webp"]}
               alt="Alicia Agosti Interiorismo"
               style={{
                 borderRadius: `2%`,
