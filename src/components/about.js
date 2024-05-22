@@ -5,14 +5,14 @@ export const About = () => {
 
   return (
     <>
-      <div className="about-main" style={{ marginBottom: '4em' }}>
+      <div className="about-main" style={{ marginBottom: '4em', marginTop: '4em' }}>
         <div>
           <h1 style={{ marginBottom: '0' }}>¿Que hacemos?</h1>
           <p className="p-2">En todos los proyectos, nos adaptamos al cliente y a sus necesidades, pero esto es una pequeña guía para orientarte en nuestro sector.</p>
         </div>
         <div className="about-component">
           <div>
-            <h2>Aruitectura</h2>
+            <h2>Arquitectura</h2>
             <p>Proyectamos la rehabilitación del espacio</p>
           </div>
           <div>

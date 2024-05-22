@@ -14,6 +14,7 @@ import { SlideSwiper } from "../components/slideSwiper"
 const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSearchTerm, setContentfulTmp, contentfulTmp }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+
   let titlesOfPost = nodes.map(({ node }) => {
     let originalTitle = node.title;
     let words = node.title.toLowerCase().split(' ');
@@ -52,7 +53,7 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
       >
         Portfolio
       </div>
-      {isHovered &&
+      {/* {isHovered &&
         <div className="dropdown"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -62,21 +63,14 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
             <div key={index} onClick={() => getCardbyItem(item.originalTitle)}>
               {item.camelCaseTitle}</div>)}
         </div>
-      }
-      {
-        (activeComponent === 'portfolio') && <div className="dropdown2">
-          <div onClick={() => setContentfulTmp(false)} style={{ marginRight: '8px' }} >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
-              <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466" />
-            </svg>
-          </div>
-          <input className='search-bar' value={searchTerm} onChange={handleSearchChange} placeholder="cual buscas?"></input>
-          <div className="ms-3">|||</div>
-        </div>
-      }
+      } */}
 
       <div onClick={() => setActiveComponent("about")}>Info</div>
+      {
+        (activeComponent === 'portfolio' && (contentfulTmp == false)) && <div className="dropdown2">
+          <input className='search-bar' value={searchTerm} onChange={handleSearchChange} placeholder="Search"></input>
+        </div>
+      }
     </div>
   )
 }
@@ -156,7 +150,6 @@ const IndexPage = ({ data }) => {
   return (
     <>
       <Seo title={'Interiorismo'} />
-
       <div style={{ textAlign: 'center', width: '100%', }}>
         <LogoBar setActiveComponent={setActiveComponent} />
         <NavBar activeComponent={activeComponent} setActiveComponent={setActiveComponent} nodes={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setContentfulTmp={setContentfulTmp} contentfulTmp={contentfulTmp} />

@@ -13,11 +13,11 @@ export const ContenfulCard = (data) => {
 
   return (
     <div>
-      <div className="container text-center mt-4">
-        <div className='p-2'>
-          <h1 style={{ fontSize: '44px' }}>{node.title}</h1>
-          <p style={{ fontSize: '20px' }}>{node.description.description}</p>
-          {node.credits && <p style={{ fontSize: '18px', fontWeight: 'lighter'}}>{node.credits}</p>}
+      <div className="container text-center mt-2">
+        <div>
+          <h1 style={{ fontSize: '34px' }}>{node.title}</h1>
+          <p style={{ fontSize: '16px', padding: '0 1rem 0 1rem' }}>{node.description.description}</p>
+          {node.credits && <p style={{ fontSize: '14px', fontWeight: 'lighter'}}>{node.credits}</p>}
         </div>
         <div>
           {isLoading ? (
@@ -29,8 +29,15 @@ export const ContenfulCard = (data) => {
                   key={photo.title}
                   image={photo.gatsbyImageData}
                   alt={node.title}
-                  style={{ margin: '1rem' }}
-                />
+                  style={{ 
+                    marginBottom: '1em',
+                    height: '80vh',
+                    width: '100%',
+                  }}
+                  imgStyle={{ 
+                    objectFit: 'cover', 
+                  }}
+                  />
               )
             ))
           )}
