@@ -1,6 +1,7 @@
 import React from 'react';
 import { About } from "./about"
 import { StaticImage } from "gatsby-plugin-image"
+import { Footer } from "../components/footer";
 
 export const Banner = () => {
 
@@ -33,7 +34,7 @@ export const Banner = () => {
         </div>
   
         <About />
-        
+        <Footer />
       </div>
     )
   }

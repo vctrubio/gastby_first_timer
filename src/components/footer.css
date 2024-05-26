@@ -1,29 +1,25 @@
 footer{
-    background-color: rgb(47, 45, 41);
+    background-color: rgb(68, 66, 63);
     color: white;
     font-size: 24px;
     margin-top: 1em;
     margin-bottom: 1em;
     height: 100px;
-
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    >* {
+    /* >* {
         display: flex;
         flex-direction: row;
         margin: 10px;
-    }
-}
-
-a{
-    text-decoration: none;
-    color: white;
+    } */
 }
 
 .svg-icon {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+    width: 60px; /* adjust as needed */
+    height: 60px; /* adjust as needed */
+    padding: 10px;
+    margin: 0 10px 0 10px;
 }

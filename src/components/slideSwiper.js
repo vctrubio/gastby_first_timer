@@ -22,14 +22,15 @@ export const SlideSwiper = ({ imgs_url }) => {
   const isMobile = window.innerWidth < 720;
 
   return (
-    <div className="d-flex flex-start" style={{ marginBottom: '6em' }}>
+    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%'}}>
       {isMobile ? (
         <Swiper
           modules={[Navigation, Autoplay]}
-          style={{ width: '85%' }}
+          style={{ width: '100%' }}
           onSwiper={setSwiper}
           slidesPerView={1}
           grabCursor={true}
+          
           centeredSlides={true}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
@@ -42,8 +43,7 @@ export const SlideSwiper = ({ imgs_url }) => {
                 src={url}
                 alt={`Slide ${index}`}
                 height={'100%'}
-                width={'100%'}
-              />
+                />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -1,0 +1,38 @@
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+
+    >* {
+        margin: 4em;
+    }
+}
+
+.info-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    >*{
+        text-align: center;
+        align-content: center;
+        >*>*{
+            text-align: center;
+            align-content: center;
+        }
+    }
+}
+
+form input, form select, form textarea {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .info {
+        flex-direction: column;
+    }
+    .info-icons{
+        flex-direction: column;
+    }
+}

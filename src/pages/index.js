@@ -4,9 +4,8 @@ import { graphql } from "gatsby";
 import Seo from "../components/seo"
 import "../components/layout_customs.css"
 import { Card } from "../components/card"
-import { Footer } from "../components/footer";
 import { LogoBar } from "../components/logobar";
-import { About } from "../components/about";
+import { Info } from "../components/info";
 import { ContenfulCard } from "../components/contenfulCard";
 import { Banner } from "../components/banner";
 import { SlideSwiper } from "../components/slideSwiper"
@@ -65,12 +64,13 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
         </div>
       } */}
 
-      <div onClick={() => setActiveComponent("about")}>Info</div>
-      {
+      <div onClick={() => setActiveComponent("info")}>Info</div>
+
+      {/* {
         (activeComponent === 'portfolio' && (contentfulTmp == false)) && <div className="dropdown2">
           <input className='search-bar' value={searchTerm} onChange={handleSearchChange} placeholder="Search"></input>
         </div>
-      }
+      } */}
     </div>
   )
 }
@@ -139,7 +139,7 @@ const getEdges = (data) => {
 }
 
 const IndexPage = ({ data }) => {
-  const [activeComponent, setActiveComponent] = useState("banner");
+  const [activeComponent, setActiveComponent] = useState("info");
   const edges = getEdges({ data })
   const [searchTerm, setSearchTerm] = useState('');
   const [contentfulTmp, setContentfulTmp] = useState(null);
@@ -156,9 +156,8 @@ const IndexPage = ({ data }) => {
         {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
         {activeComponent === "banner" && <Banner />}
         {activeComponent === "portfolio" && <PortfolioAll edges={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
-        {activeComponent === "info" && <About />}
+        {activeComponent === "info" && <Info/>}
 
-        {/* <Footer /> */}
       </div>
     </>
   )
