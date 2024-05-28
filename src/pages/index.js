@@ -166,7 +166,7 @@ const getEdges = (data) => {
 }
 
 const IndexPage = ({ data }) => {
-  const [activeComponent, setActiveComponent] = useState("info");
+  const [activeComponent, setActiveComponent] = useState("banner");
   const edges = getEdges({ data })
   const [contentfulTmp, setContentfulTmp] = useState(null);
   const imgs_url = data.allContentfulAliHome.nodes.flatMap(node =>
