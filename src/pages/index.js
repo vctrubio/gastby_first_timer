@@ -1,5 +1,4 @@
-import * as React from "react"
-import { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { graphql } from "gatsby";
 import Seo from "../components/seo"
 import "../components/layout_customs.css"
@@ -9,31 +8,67 @@ import { Info } from "../components/info";
 import { ContenfulCard } from "../components/contenfulCard";
 import { Banner } from "../components/banner";
 import { SlideSwiper } from "../components/slideSwiper"
+import DrowDownSvg from '../svgs/dropdown.svg';
 
-const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSearchTerm, setContentfulTmp, contentfulTmp }) => {
-  const [isHovered, setIsHovered] = useState(false);
+/* todo
+style maybe all white and black like she said
+*/
 
+const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
+  const dropdownRef = useRef(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  let titlesOfPost = nodes.map(({ node }) => {
-    let originalTitle = node.title;
-    let words = node.title.toLowerCase().split(' ');
-    for (let i = 0; i < words.length; i++) {
-      words[i] = words[i].charAt(0).toUpperCase() + words[i].substring(1);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
     }
-    let camelCaseTitle = words.join(' ');
-    return { originalTitle, camelCaseTitle };
-  });
+  
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
-  const handleSearchChange = event => {
-    setSearchTerm(event.target.value);
-    if (event.target.value.length > 0) {
-      setActiveComponent('portfolio')
-    }
-    if (contentfulTmp) setContentfulTmp(false)
-  };
+  const DropDownLinks = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+
+    let titlesOfPost = nodes.map(({ node }) => {
+      let originalTitle = node.title;
+      let words = node.title.toLowerCase().split(' ');
+      for (let i = 0; i < words.length; i++) {
+        words[i] = words[i].charAt(0).toUpperCase() + words[i].substring(1);
+      }
+      let camelCaseTitle = words.join(' ');
+      return { originalTitle, camelCaseTitle };
+    });
+
+    const filteredTitles = titlesOfPost.filter(title =>
+      title.camelCaseTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return (
+      <div className="dropdown2" ref={dropdownRef}>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
+        />
+        {(filteredTitles.length > 0 ? filteredTitles : titlesOfPost).map((title, index) => (
+          <div key={index} onClick={() => getCardbyItem(title)}>
+            {title.camelCaseTitle}
+          </div>
+        ))}
+      </div>
+    )
+  }
 
   const getCardbyItem = (item) => {
-    let card = nodes.filter(({ node }) => node.title === item);
+    setDropdownOpen(false)
+    let card = nodes.filter(({ node }) => node.title === item.originalTitle);
     setContentfulTmp(card[0].node);
     setActiveComponent('portfolio')
   }
@@ -43,57 +78,49 @@ const NavBar = ({ activeComponent, setActiveComponent, nodes, searchTerm, setSea
     setContentfulTmp(false)
   }
 
+  const openDropdown = () => {
+    setDropdownOpen(prevState => !prevState);
+  }
+
   return (
     <div className="navbar">
       <div onClick={() => setActiveComponent("banner")}>About</div>
-      <div onClick={() => setPortfolioActive()}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        Portfolio
-      </div>
-      {/* {isHovered &&
-        <div className="dropdown"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onClick={() => setIsHovered(false)}
+      <div className="d-flex flex-row"
+        style={{ alignItems: 'center', position: 'relative' }}>
+        <div onClick={() => setPortfolioActive()}
         >
-          {titlesOfPost.map((item, index) =>
-            <div key={index} onClick={() => getCardbyItem(item.originalTitle)}>
-              {item.camelCaseTitle}</div>)}
+          Portfolio
         </div>
-      } */}
+        <div
+          style={{
+            marginLeft: '10px',
+            cursor: 'pointer',
+            width: '25px',
+            paddingTop: '20px',
+            alignItems: 'center',
 
+          }}
+          onClick={(event) => {
+            event.stopPropagation();
+            openDropdown();
+          }}
+        >
+          <img src={DrowDownSvg} alt="whatsapp" />
+        </div>
+        {dropdownOpen && (<DropDownLinks />)}
+      </div>
       <div onClick={() => setActiveComponent("info")}>Info</div>
-
-      {/* {
-        (activeComponent === 'portfolio' && (contentfulTmp == false)) && <div className="dropdown2">
-          <input className='search-bar' value={searchTerm} onChange={handleSearchChange} placeholder="Search"></input>
-        </div>
-      } */}
     </div>
   )
 }
 
-
-const PortfolioAll = ({ edges, searchTerm, setSearchTerm, contentfulTmp, setContentfulTmp }) => {
-  const [filteredPosts, setFilteredPosts] = useState(edges);
-
-  React.useEffect(() => {
-    if (searchTerm.length > 0) {
-      setFilteredPosts(edges.filter(({ node }) => node.title.toLowerCase().includes(searchTerm.toLowerCase())));
-    } else {
-      setFilteredPosts(edges);
-    }
-  }, [searchTerm, edges]);
-
+const PortfolioAll = ({ edges, contentfulTmp, setContentfulTmp }) => {
   const handleCardClick = (cardData) => {
-    setSearchTerm('');
     setContentfulTmp(cardData);
   };
 
   const getTitleOpacity = () => {
-    if (searchTerm.length > 0 || window.innerWidth < 768) {
+    if (window.innerWidth < 768) {
       return "title-opacity";
     }
     return "";
@@ -101,8 +128,8 @@ const PortfolioAll = ({ edges, searchTerm, setSearchTerm, contentfulTmp, setCont
 
   const PostView = () => {
     return (
-      filteredPosts.length > 0 ?
-        filteredPosts.map(({ node }) => (
+      edges.length > 0 ?
+        edges.map(({ node }) => (
           <div key={node.id} onClick={() => handleCardClick(node)}>
             <Card
               title={<div className={getTitleOpacity()}>{node.title}</div>}
@@ -128,7 +155,7 @@ const PortfolioAll = ({ edges, searchTerm, setSearchTerm, contentfulTmp, setCont
           </button>
         </div>
       ) : (
-        <PostView posts={filteredPosts} />
+        <PostView />
       )}
     </div>
   )
@@ -141,7 +168,6 @@ const getEdges = (data) => {
 const IndexPage = ({ data }) => {
   const [activeComponent, setActiveComponent] = useState("info");
   const edges = getEdges({ data })
-  const [searchTerm, setSearchTerm] = useState('');
   const [contentfulTmp, setContentfulTmp] = useState(null);
   const imgs_url = data.allContentfulAliHome.nodes.flatMap(node =>
     node.fotos.map(foto => foto.file.url)
@@ -152,12 +178,11 @@ const IndexPage = ({ data }) => {
       <Seo title={'Interiorismo'} />
       <div style={{ textAlign: 'center', width: '100%', }}>
         <LogoBar setActiveComponent={setActiveComponent} />
-        <NavBar activeComponent={activeComponent} setActiveComponent={setActiveComponent} nodes={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setContentfulTmp={setContentfulTmp} contentfulTmp={contentfulTmp} />
+        <NavBar setActiveComponent={setActiveComponent} setContentfulTmp={setContentfulTmp} nodes={edges} />
         {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
         {activeComponent === "banner" && <Banner />}
-        {activeComponent === "portfolio" && <PortfolioAll edges={edges} searchTerm={searchTerm} setSearchTerm={setSearchTerm} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
-        {activeComponent === "info" && <Info/>}
-
+        {activeComponent === "portfolio" && <PortfolioAll edges={edges} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
+        {activeComponent === "info" && <Info />}
       </div>
     </>
   )

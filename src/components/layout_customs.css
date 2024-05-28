@@ -40,11 +40,9 @@
     >* {
         margin: 0 10px;
         cursor: pointer;
-        /* border-bottom: 1px solid black; */
         font-weight: normal;
         padding: 4px;
     }
-
 
     >*:hover {
         color: black;
@@ -55,19 +53,23 @@
 }
 
 .dropdown2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 200px;
-    top: 20px;
-    margin-right: 10em;
-    margin-top: 20px;
+    position:absolute;
+    top: 100%;
+    left: 5;
+    /* position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
     z-index: 8;
-    border-radius: 10px;
+    background-color: white;
+    border-radius: 5px;
     align-items: center;
+    font-weight: normal;
+
+    >*:hover {
+        font-weight: bold;
+        background-color: aliceblue;
+    }
 }
 
 .title-opacity {
@@ -96,11 +98,5 @@
 
     &:hover {
         background: rgb(133, 129, 129); 
-    }
-}
-
-@media (max-width: 768px) {
-    .dropdown2 {
-        display: none;
     }
 }

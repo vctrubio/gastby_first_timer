@@ -6,7 +6,6 @@ import 'swiper/css/autoplay';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-
 export const SlideSwiper = ({ imgs_url }) => {
   const initialActiveIndex = Math.floor(imgs_url.length / 3 - 1);
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
