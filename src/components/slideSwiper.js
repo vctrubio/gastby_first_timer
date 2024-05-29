@@ -18,7 +18,7 @@ export const SlideSwiper = ({ imgs_url }) => {
     setActiveIndex(index);
   };
 
-const Mobile = window.innerWidth < 720;
+const Mobile = typeof window !== 'undefined' ? window.innerWidth < 720 : false;
 
   return (
     <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%'}}>
