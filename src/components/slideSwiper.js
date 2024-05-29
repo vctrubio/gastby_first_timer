@@ -18,9 +18,11 @@ export const SlideSwiper = ({ imgs_url }) => {
     setActiveIndex(index);
   };
 
+const Mobile = window.innerWidth < 720;
+
   return (
     <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%'}}>
-      {window.innerWidth < 720 ? (
+      {Mobile? (
         <Swiper
           modules={[Navigation, Autoplay]}
           style={{ width: '100%' }}

@@ -33,7 +33,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Alicia Agosti Interiorismo Madrid Lujo España`,
+        name: `Alicia Agosti Interiorismo de Lugo en Madrid, España`,
         short_name: `Alicia Agosti Interiorismo`,
         start_url: `/`,
         background_color: `#663399`,
