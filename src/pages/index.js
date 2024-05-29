@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { graphql } from "gatsby";
 import Seo from "../components/seo"
 import "../components/layout_customs.css"
-
 import { LogoBar } from "../components/logobar";
 import { Info } from "../components/info";
 import { Banner } from "../components/banner";
