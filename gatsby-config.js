@@ -39,7 +39,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#319197`, // Specify your theme color here   // https://css-tricks.com/meta-theme-color-and-trickery/
         display: `minimal-ui`,
-        icon: `src/images/aliagostiinteriorismo.png`
+        icon: `src/images/alilogo.png`
       },
     },
     {
