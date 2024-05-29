@@ -9,8 +9,8 @@ import 'swiper/css/navigation';
 export const SlideSwiper = ({ imgs_url }) => {
   const initialActiveIndex = Math.floor(imgs_url.length / 3 - 1);
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
-
   const [swiper, setSwiper] = useState(null);
+
   const handleClick = (index) => {
     if (swiper) {
       swiper.slideTo(index);
@@ -18,11 +18,9 @@ export const SlideSwiper = ({ imgs_url }) => {
     setActiveIndex(index);
   };
 
-  const isMobile = window.innerWidth < 720;
-
   return (
     <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%'}}>
-      {isMobile ? (
+      {window.innerWidth < 720 ? (
         <Swiper
           modules={[Navigation, Autoplay]}
           style={{ width: '100%' }}
@@ -55,6 +53,7 @@ export const SlideSwiper = ({ imgs_url }) => {
           slidesPerView={2}
           grabCursor={true}
           centeredSlides={true}
+          lazy={true}
           autoplay={{ delay: 2000, disableOnInteraction: false }}
           initialSlide={initialActiveIndex}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}

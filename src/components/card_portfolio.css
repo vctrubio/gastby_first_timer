@@ -10,16 +10,15 @@
     cursor: pointer;
     border-radius: 4px;
     opacity: 0.8;
-    color: rgba(0, 0, 0, 0); /* Opacity for the text */
+    color: rgba(0, 0, 0, 0); 
     font-size: 38px;
 }
 
 .card-portfolio:hover {
     transition: ease-out 1s;
     font-weight: bold;
-    color: rgba(0, 0, 0, 1); /* Opacity for the text */
+    color: rgba(0, 0, 0, 1); 
     background-image: none !important;
-    /* box-shadow:rgb(88, 79, 76) 0px 0px 10px 0px; */
 }
 
 .portfolio-all {

@@ -11,17 +11,19 @@ export const ContenfulCard = (data) => {
     }
   }, [node.media])
 
+  const imageWidth = node.media.length === 4 ? '45%' : '30%';
+
   return (
     <div>
       <div className="container text-center mt-2">
         <div>
           <h1 style={{ fontSize: '34px' }}>{node.title}</h1>
-          <p style={{ fontSize: '16px', padding: '0 1rem 0 1rem' }}>{node.description.description}</p>
-          {node.credits && <p style={{ fontSize: '14px', fontWeight: 'lighter'}}>{node.credits}</p>}
+          <p style={{ fontSize: '16px', padding: '0rem 2rem 0rem 2rem' }}>{node.description.description}</p>
+          {node.credits && <p style={{ fontSize: '14px', fontWeight: 'lighter', padding: '0rem 2rem 0rem 2rem'}}>{node.credits}</p>}
         </div>
-        <div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
           {isLoading ? (
-            <p>No photos...</p>
+            <p>No encontramos fotos...</p>
           ) : (
             node.media.map((photo) => (
               photo.gatsbyImageData && (
@@ -30,19 +32,26 @@ export const ContenfulCard = (data) => {
                   image={photo.gatsbyImageData}
                   alt={node.title}
                   style={{ 
-                    marginBottom: '1em',
-                    height: '80vh',
-                    width: '100%',
+                    width: imageWidth,
+                    margin: '0.5em',
                   }}
                   imgStyle={{ 
                     objectFit: 'cover', 
                   }}
+                  className="responsive-image"
                   />
               )
             ))
           )}
         </div>
       </div>
+      <style jsx>{`
+        @media (max-width: 1000px) {
+          .responsive-image {
+            width: 100% !important; // Override the width for small screens
+          }
+        }
+      `}</style>
     </div>
-  )
-}
+  );
+};

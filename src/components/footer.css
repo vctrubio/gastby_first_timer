@@ -1,5 +1,4 @@
 footer{
-    background-color: rgb(68, 66, 63);
     color: white;
     font-size: 24px;
     margin-top: 1em;
@@ -9,17 +8,17 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* >* {
-        display: flex;
-        flex-direction: row;
-        margin: 10px;
-    } */
 }
 
 .svg-icon {
-    width: 60px; /* adjust as needed */
-    height: 60px; /* adjust as needed */
+    width: 60px; 
+    height: 60px;
     padding: 10px;
-    margin: 0 10px 0 10px;
+    margin: 0 25px 0 25px;
+    opacity: 0.6;
+
+    &:hover{
+        opacity: 1;
+        transform: scale(1.2);
+    }
 }

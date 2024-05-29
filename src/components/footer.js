@@ -1,39 +1,10 @@
 import React from 'react'
 import SVG from 'react-inlinesvg'
-import whatsappSVG from '../svgs/whatsapp-white.svg'
-import phoneSVG from '../svgs/phone-white.svg'
-import mailSVG from '../svgs/mail-white.svg'
-import instagramSVG from '../svgs/insta-white.svg'
-
+import whatsappSVG from '../svgs/whatsapp-black.svg'
+import phoneSVG from '../svgs/phone-black.svg'
+import mailSVG from '../svgs/mail-black.svg'
+import instagramSVG from '../svgs/insta-black.svg'
 import './footer.css'
-
-// +34 630 19 91 12
-//creeate a map with the icons and the links
-
-const icons = [
-    {
-        icon: whatsappSVG,
-        link: 'https://wa.me/+34630199112',
-        text: '630 19 91 12'
-    },
-    {
-        icon: phoneSVG,
-        link: 'tel:+34630199112',
-        text: '630 19 91 12'
-    },
-    {
-        icon: instagramSVG,
-        link: 'https://www.instagram.com/alicia.agosti.interiorismo/',
-        text: 'alicia.agosti.interiorismo'
-    },
-    {
-        icon: mailSVG,
-        link: 'mailto:alicia@aliciaagosti.com',
-    }
-]
-
-
-
 
 export const Footer = () => {
     return (
@@ -44,7 +15,6 @@ export const Footer = () => {
             <a href="tel:+34630199112" >
                 <SVG src={phoneSVG} className='svg-icon' />
             </a>
-          
             <a href="https://www.instagram.com/alicia.agosti.interiorismo/" taget="_blank" rel="noopener noreferrer">
                 <SVG src={instagramSVG} className='svg-icon' />
             </a>

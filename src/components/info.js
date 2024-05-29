@@ -22,7 +22,7 @@ const Form = () => {
     }
 
     return (
-        <form onSubmit={sendEmail} style={{ width: '500px' }}>
+        <form onSubmit={sendEmail} style={{ width: '350px' }}>
             <div className="mb-3">
                 <label htmlFor="nombre" className="form-label">Nombre</label>
                 <input type="text" className="form-control" id="nombre" name="nombre" />
@@ -74,9 +74,14 @@ const Icons = () => {
         <div className='info-icons'>
             <div className='d-flex flex-column'>
                 <div className='d-flex flex-row'>
-                    <a href="https://wa.me/+34630199112">
-                        <img src={whatsappSVG} alt="whatsapp" className='svg-icon' />
+                    <a href="mailto:alicia@aliciaagosti.com">
+                        <SVG src={mailSVG} className='svg-icon' />
                     </a>
+                    <div>
+                        aliciakeys@gmail.com
+                    </div>
+                </div>
+                <div className='d-flex flex-row'>
                     <a href="tel:+34630199112" >
                         <img src={phoneSVG} alt="phone" className='svg-icon' />
                     </a>
@@ -84,10 +89,7 @@ const Icons = () => {
                         +34 630 19 91 12
                     </div>
                 </div>
-                <div className='d-flex flex-row mt-3'>
-                    <a href="mailto:alicia@aliciaagosti.com">
-                        <SVG src={mailSVG} className='svg-icon' />
-                    </a>
+                <div className='d-flex flex-row'>
                     <a href="https://www.instagram.com/alicia.agosti.interiorismo/" taget="_blank" rel="noopener noreferrer">
                         <img src={instagramSVG} alt="instagram" className='svg-icon' />
                     </a>
