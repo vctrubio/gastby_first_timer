@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
+
     >* {
         display: flex;
         width: 100%;
@@ -15,6 +16,7 @@
 .about-component {
     display: flex;
     flex-direction: row;
+    padding-left: 55px;
 
     >* {
         margin: 25px;
@@ -31,6 +33,7 @@
 @media (max-width: 768px) {
     .about-component {
         flex-direction: column;
+        padding-left: 0 !important;
     }
     .about-title{
         max-width: 480px;

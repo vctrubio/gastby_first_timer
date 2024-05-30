@@ -63,7 +63,7 @@ const Form = () => {
                 <label htmlFor="descripcion" className="form-label">Descripción</label>
                 <textarea className="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-secondary">Submit</button>
         </form>
 
     )
@@ -72,13 +72,13 @@ const Form = () => {
 const Icons = () => {
     return (
         <div className='info-icons'>
-            <div className='d-flex flex-column'>
+            <div className='d-flex flex-column '>
                 <div className='d-flex flex-row'>
                     <a href="mailto:alicia@aliciaagosti.com">
                         <SVG src={mailSVG} className='svg-icon' />
                     </a>
                     <div>
-                        aliciakeys@gmail.com
+                        estudio@aliciaagosti.com
                     </div>
                 </div>
                 <div className='d-flex flex-row'>
@@ -104,8 +104,8 @@ const Icons = () => {
 export const Info = () => {
     return (
         <div className='info'>
-            <Icons />
-            <Form />
+                <Icons />
+                <Form />
         </div>
     )
 }

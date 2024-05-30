@@ -54,37 +54,29 @@
 
 .dropdown2 {
     position:absolute;
-    top: 100%;
-    right: 10px;
-    /* position: fixed;
-    top: 50%;
+    top: 80%;
     left: 50%;
-    transform: translate(-50%, -50%); */
+    transform: translateX(-50%);
     z-index: 8;
-    background-color: white;
+    background-color: #F7F1EE;
     border-radius: 5px;
     align-items: center;
     font-weight: normal;
+    min-width: 200px;
+    margin: auto;
+    border: 1px solid rgb(58, 55, 55);
 
     >*:hover {
         font-weight: bold;
         background-color: aliceblue;
     }
+    >* {
+        padding: 5px;
+    }
 }
 
 .title-opacity {
     color: black;
-    /* background-color: #ffffff; */
-}
-
-.search-bar {
-    background-color: rgb(241, 235, 235);
-    width: 200px;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 0 20px 0 20px;
-    text-align: center;
-    color: #000000;
 }
 
 .back-btn {

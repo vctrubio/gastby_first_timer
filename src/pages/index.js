@@ -53,7 +53,17 @@ const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
+          style={{ borderRadius: '20px',
+            backrgoundColor: '#F7F1EE',
+            width: '75%',
+            border: 'none',
+            textAlign: 'center',
+            marginTop: '10px',
+            marginBottom: '10px',
+            opacity: '0.8',
+            backgroundColor: '#F7F1EE',
+            border: '1px solid grey',
+           }}
         />
         {(filteredTitles.length > 0 ? filteredTitles : titlesOfPost).map((title, index) => (
           <div key={index} onClick={() => getCardbyItem(title)}>
@@ -107,7 +117,7 @@ const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
         </div>
         {dropdownOpen && (<DropDownLinks />)}
       </div>
-      <div onClick={() => setActiveComponent("info")}>Info</div>
+      <div onClick={() => setActiveComponent("info")}>Contact</div>
     </div>
   )
 }

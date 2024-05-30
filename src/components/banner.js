@@ -7,7 +7,7 @@ export const Banner = () => {
 
     //setSeoTitlw to Interiorismo
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '6em'}}>
         <div className="d-flex flex-column flex-md-row justify-content-center" style={{ marginBottom: '4em', marginTop: '2em'}}>
   
           <div className="w-md-50 mx-md-3" style={{ minWidth: '380px' }}>

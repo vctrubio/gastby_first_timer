@@ -1,35 +1,61 @@
 .card-portfolio {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Added to position pseudo-element */
+  width: 400px;
+  height: 360px;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0.8;
+  color: rgba(0, 0, 0, 0); 
+  font-size: 38px;
+  transition: color ease-out 2s, font-weight ease-out 2s; /* Specify transitions for text properties */
+}
 
-    width: 400px;
-    height: 360px;
+.card-portfolio::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit; /* Use the same background as the card */
+  border-radius: inherit;
+  transition: background-color ease-out 2s, opacity ease-out 2s; /* Specify transitions for background */
+  z-index: 0; /* Ensure pseudo-element is behind the text */
+}
 
-    margin: 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    opacity: 0.8;
-    color: rgba(0, 0, 0, 0); 
-    font-size: 38px;
+.card-portfolio:hover::before {
+  background: white; /* Transition to white background */
+  opacity: 1; /* Make the pseudo-element visible */
+}
+
+.card-portfolio:hover {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 1); /* Change text color */
+  opacity: 1; /* Make the text fully opaque */
+}
+
+.card-portfolio > * {
+  position: relative;
+  z-index: 1; /* Ensure text and other content are above the pseudo-element */
 }
 
 .portfolio-all {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    padding-top: 20px;
-    width: 100%;
-    overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  width: 100%;
+  overflow-x: scroll;
 }
 
 @media (min-width: 980px) {
-    .card-portfolio:hover {
-      transition: ease-out 1s;
-      font-weight: bold;
-      color: rgba(0, 0, 0, 1); 
-      background-image: none !important;
-    }
+  .card-portfolio:hover::before {
+      opacity: 1; /* Make the pseudo-element visible */
   }
+}

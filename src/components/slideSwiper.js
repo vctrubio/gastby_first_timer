@@ -14,7 +14,7 @@ export const SlideSwiper = ({ imgs_url }) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setIsMobile(window.innerWidth < 720);
+      setIsMobile(window.innerWidth < 768);
     }
   }, []);
 
@@ -26,7 +26,7 @@ export const SlideSwiper = ({ imgs_url }) => {
   };
 
   return (
-    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%' }}>
+    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%', margin: '0 !important'}}>
       {isMobile ? (
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -45,7 +45,7 @@ export const SlideSwiper = ({ imgs_url }) => {
                 alt={`Slide ${index}`}
                 style={{
                   objectFit: 'cover',
-                  width: '100vw',
+                  width: '100%',
                   height: '60vh'
                 }}
               />
