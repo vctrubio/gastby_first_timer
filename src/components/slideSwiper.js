@@ -45,7 +45,7 @@ export const SlideSwiper = ({ imgs_url }) => {
                 alt={`Slide ${index}`}
                 style={{
                   objectFit: 'cover',
-                  width: 'auto',
+                  width: '100vw',
                   height: '60vh'
                 }}
               />
