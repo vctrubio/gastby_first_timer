@@ -95,7 +95,7 @@
 }
 
 
-@media (max-width: 768) {
+@media (max-width: 768px) {
     .navbar >* {
         margin: 0 5px 0 5px;
     }
