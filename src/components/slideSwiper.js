@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -10,6 +10,13 @@ export const SlideSwiper = ({ imgs_url }) => {
   const initialActiveIndex = Math.floor(imgs_url.length / 3 - 1);
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [swiper, setSwiper] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.innerWidth < 720);
+    }
+  }, []);
 
   const handleClick = (index) => {
     if (swiper) {
@@ -18,31 +25,22 @@ export const SlideSwiper = ({ imgs_url }) => {
     setActiveIndex(index);
   };
 
-const Mobile = typeof window !== 'undefined' ? window.innerWidth < 720 : false;
-
   return (
-    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%'}}>
-      {Mobile? (
+    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%' }}>
+      {isMobile ? (
         <Swiper
           modules={[Navigation, Autoplay]}
           style={{ width: '100%' }}
           onSwiper={setSwiper}
           slidesPerView={1}
           grabCursor={true}
-          
           centeredSlides={true}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         >
           {imgs_url.map((url, index) => (
-            <SwiperSlide
-              key={index}
-            >
-              <img
-                src={url}
-                alt={`Slide ${index}`}
-                height={'100%'}
-                />
+            <SwiperSlide key={index}>
+              <img src={url} alt={`Slide ${index}`} height={'100%'} />
             </SwiperSlide>
           ))}
         </Swiper>
