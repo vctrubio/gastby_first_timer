@@ -40,7 +40,15 @@ export const SlideSwiper = ({ imgs_url }) => {
         >
           {imgs_url.map((url, index) => (
             <SwiperSlide key={index}>
-              <img src={url} alt={`Slide ${index}`} height={'100%'} />
+              <img
+                src={url}
+                alt={`Slide ${index}`}
+                style={{
+                  objectFit: 'cover',
+                  width: 'auto',
+                  height: '60vh'
+                }}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
