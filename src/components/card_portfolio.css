@@ -14,13 +14,6 @@
     font-size: 38px;
 }
 
-.card-portfolio:hover {
-    transition: ease-out 1s;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 1); 
-    background-image: none !important;
-}
-
 .portfolio-all {
     display: flex;
     flex-direction: row;
@@ -32,7 +25,7 @@
     overflow-x: scroll;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (min-width: 980px) {
     .card-portfolio:hover {
       transition: ease-out 1s;
       font-weight: bold;
