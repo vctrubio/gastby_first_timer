@@ -85,7 +85,7 @@ const Icons = () => {
                     <a href="tel:+34630199112" >
                         <img src={phoneSVG} alt="phone" className='svg-icon' />
                     </a>
-                    <div>
+                    <div style={{textDecoration: 'none'}}>
                         +34 630 19 91 12
                     </div>
                 </div>
