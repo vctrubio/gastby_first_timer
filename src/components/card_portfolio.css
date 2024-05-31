@@ -28,7 +28,7 @@
   z-index: 0; /* Ensure pseudo-element is behind the text */
 }
 
-@media (max-width: 980px) {
+@media (min-width: 980px) {
   .card-portfolio:hover::before {
       background: #F7F1EE; /* Transition to white background */
       opacity: 1; /* Make the pseudo-element visible */
