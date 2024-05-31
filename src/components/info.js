@@ -72,16 +72,16 @@ const Form = () => {
 const Icons = () => {
     return (
         <div className='info-icons'>
-            <div className='d-flex flex-column '>
-                <div className='d-flex flex-row'>
-                    <a href="mailto:alicia@aliciaagosti.com">
+            <div className='d-flex flex-column'>
+                <div className='d-flex flex-row align-items-center'>
+                    <a href="mailto:estudio@aliciaagosti.com">
                         <SVG src={mailSVG} className='svg-icon' />
                     </a>
                     <div>
                         estudio@aliciaagosti.com
                     </div>
                 </div>
-                <div className='d-flex flex-row'>
+                <div className='d-flex flex-row align-items-center'>
                     <a href="tel:+34630199112" >
                         <img src={phoneSVG} alt="phone" className='svg-icon' />
                     </a>
@@ -89,7 +89,7 @@ const Icons = () => {
                         +34 630 19 91 12
                     </div>
                 </div>
-                <div className='d-flex flex-row'>
+                <div className='d-flex flex-row align-items-center'>
                     <a href="https://www.instagram.com/alicia.agosti.interiorismo/" taget="_blank" rel="noopener noreferrer">
                         <img src={instagramSVG} alt="instagram" className='svg-icon' />
                     </a>
@@ -101,6 +101,7 @@ const Icons = () => {
         </div>
     )
 }
+
 export const Info = () => {
     return (
         <div className='info'>
