@@ -26,7 +26,7 @@ export const SlideSwiper = ({ imgs_url }) => {
   };
 
   return (
-    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%', margin: '0 !important'}}>
+    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%', margin: '0 !important' }}>
       {isMobile ? (
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -43,6 +43,8 @@ export const SlideSwiper = ({ imgs_url }) => {
               <img
                 src={url}
                 alt={`Slide ${index}`}
+                loading="eager"
+                onLoad={(e) => e.target.style.opacity = 1}
                 style={{
                   objectFit: 'cover',
                   width: '100%',
@@ -70,6 +72,8 @@ export const SlideSwiper = ({ imgs_url }) => {
             <SwiperSlide
               key={index}
               onClick={() => handleClick(index)}
+              loading="eager"
+              onLoad={(e) => e.target.style.opacity = 1}
               style={{
                 display: 'flex',
                 alignItems: 'center',

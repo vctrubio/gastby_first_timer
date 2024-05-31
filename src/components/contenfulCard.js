@@ -31,6 +31,7 @@ export const ContenfulCard = (data) => {
                   key={photo.title}
                   image={photo.gatsbyImageData}
                   alt={node.title}
+                  placeholder="blurred"
                   style={{ 
                     width: imageWidth,
                     margin: '0.5em',

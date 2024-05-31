@@ -15,6 +15,7 @@ export const LogoBar = ({ setActiveComponent }) => {
         <StaticImage
           src="../images/logoAA.webp"
           loading="eager"
+          placeholder="blurred"
           width={400}
           quality={100}
           formats={["auto", "webp"]}
@@ -25,6 +26,7 @@ export const LogoBar = ({ setActiveComponent }) => {
             transform: 'scale(1.4)',
           }}
         />
+
       </div>
     );
   };
