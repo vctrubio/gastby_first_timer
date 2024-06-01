@@ -11,7 +11,7 @@ export const LogoBar = ({ setActiveComponent }) => {
     };
   
     return (
-      <div className="d-flex justify-content-around" onClick={handleClick}>
+      <div className="d-flex justify-content-around" onClick={handleClick} style={{width: '100%'}}>
         <StaticImage
           src="../images/logoAA.webp"
           loading="eager"
