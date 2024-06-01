@@ -26,7 +26,7 @@ export const SlideSwiper = ({ imgs_url }) => {
   };
 
   return (
-    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%', margin: '0 !important' }}>
+    <div className="d-flex flex-start" style={{ marginBottom: '6em', width: '100%', margin: '0 !important'}}>
       {isMobile ? (
         <Swiper
           modules={[Navigation, Autoplay]}

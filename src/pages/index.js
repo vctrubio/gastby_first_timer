@@ -8,9 +8,6 @@ import { Banner } from "../components/banner";
 import { SlideSwiper } from "../components/slideSwiper"
 import DrowDownSvg from '../svgs/dropdown.svg';
 import { PortfolioAll } from '../components/porfolio';
-/* todo
-style maybe all white and black like she said
-*/
 
 const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
   const dropdownRef = useRef(null);
@@ -22,12 +19,28 @@ const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
         setDropdownOpen(false);
       }
     }
-  
+
     document.addEventListener("click", handleClickOutside);
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  const getCardbyItem = (item) => {
+    setDropdownOpen(false)
+    let card = nodes.filter(({ node }) => node.title === item.originalTitle);
+    setContentfulTmp(card[0].node);
+    setActiveComponent('portfolio')
+  }
+
+  const setPortfolioActive = () => {
+    setActiveComponent('portfolio')
+    setContentfulTmp(false)
+  }
+
+  const openDropdown = () => {
+    setDropdownOpen(prevState => !prevState);
+  }
 
   const DropDownLinks = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -53,7 +66,8 @@ const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ borderRadius: '20px',
+          style={{
+            borderRadius: '20px',
             backrgoundColor: '#F7F1EE',
             width: '75%',
             border: 'none',
@@ -63,7 +77,7 @@ const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
             opacity: '0.8',
             backgroundColor: '#F7F1EE',
             border: '1px solid grey',
-           }}
+          }}
         />
         {(filteredTitles.length > 0 ? filteredTitles : titlesOfPost).map((title, index) => (
           <div key={index} onClick={() => getCardbyItem(title)}>
@@ -74,46 +88,28 @@ const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
     )
   }
 
-  const getCardbyItem = (item) => {
-    setDropdownOpen(false)
-    let card = nodes.filter(({ node }) => node.title === item.originalTitle);
-    setContentfulTmp(card[0].node);
-    setActiveComponent('portfolio')
-  }
-
-  const setPortfolioActive = () => {
-    setActiveComponent('portfolio')
-    setContentfulTmp(false)
-  }
-
-  const openDropdown = () => {
-    setDropdownOpen(prevState => !prevState);
-  }
-
   return (
     <div className="navbar">
       <div onClick={() => setActiveComponent("banner")}>About</div>
-      <div className="d-flex flex-row"
-        style={{ alignItems: 'center', position: 'relative' }}>
+      <div
+        style={{ alignItems: 'center', position: 'relative', marginLeft: '25px' }}>
         <div onClick={() => setPortfolioActive()}
         >
           Portfolio
         </div>
         <div
           style={{
-            marginLeft: '10px',
             cursor: 'pointer',
             width: '25px',
             paddingTop: '20px',
             alignItems: 'center',
-
           }}
           onClick={(event) => {
             event.stopPropagation();
             openDropdown();
           }}
         >
-          <img src={DrowDownSvg} alt="whatsapp" />
+          <img src={DrowDownSvg} alt="^" />
         </div>
         {dropdownOpen && (<DropDownLinks />)}
       </div>
@@ -122,15 +118,11 @@ const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
   )
 }
 
-
-const getEdges = (data) => {
-  return data.data.allContentfulAliciaInterior.edges
-}
-
 const IndexPage = ({ data }) => {
   const [activeComponent, setActiveComponent] = useState("banner");
-  const edges = getEdges({ data })
   const [contentfulTmp, setContentfulTmp] = useState(null);
+
+  const edges = data.allContentfulAliciaInterior.edges
   const imgs_url = data.allContentfulAliHome.nodes.flatMap(node =>
     node.fotos.map(foto => foto.file.url)
   );
@@ -138,7 +130,7 @@ const IndexPage = ({ data }) => {
   return (
     <>
       <Seo title={'Interiorismo'} />
-      <div style={{ textAlign: 'center', width: '100%', }}>
+      <div style={{ textAlign: 'center', width: '100vw'}}>
         <LogoBar setActiveComponent={setActiveComponent} />
         <NavBar setActiveComponent={setActiveComponent} setContentfulTmp={setContentfulTmp} nodes={edges} />
         {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
