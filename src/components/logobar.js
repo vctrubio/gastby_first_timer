@@ -16,7 +16,6 @@ export const LogoBar = ({ setActiveComponent }) => {
           src="../images/logoAA.webp"
           loading="eager"
           placeholder="blurred"
-          width={400}
           quality={100}
           formats={["auto", "webp"]}
           alt="Alicia Agosti Interiorismo"
