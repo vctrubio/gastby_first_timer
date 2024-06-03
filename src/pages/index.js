@@ -128,15 +128,13 @@ const IndexPage = ({ data }) => {
   );
 
   return (
-    <div className='cointainer'>
-      <div style={{ textAlign: 'center', width: '100%', margin: '0 !important'}}>
-        <LogoBar setActiveComponent={setActiveComponent} />
-        <NavBar setActiveComponent={setActiveComponent} setContentfulTmp={setContentfulTmp} nodes={edges} />
-        {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
-        {activeComponent === "banner" && <Banner />}
-        {activeComponent === "portfolio" && <PortfolioAll edges={edges} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
-        {activeComponent === "info" && <Info />}
-      </div>
+    <div style={{ textAlign: 'center', width: '100%', margin: '0 !important', overflow: 'hidden' }}>
+      {/* <LogoBar setActiveComponent={setActiveComponent} /> */}
+      <NavBar setActiveComponent={setActiveComponent} setContentfulTmp={setContentfulTmp} nodes={edges} />
+      {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
+      {activeComponent === "banner" && <Banner />}
+      {activeComponent === "portfolio" && <PortfolioAll edges={edges} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
+      {activeComponent === "info" && <Info />}
     </div>
   )
 }
