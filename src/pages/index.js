@@ -129,7 +129,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <div style={{ textAlign: 'center', width: '100%', margin: '0 !important', overflow: 'hidden' }}>
-      {/* <LogoBar setActiveComponent={setActiveComponent} /> */}
+      <LogoBar setActiveComponent={setActiveComponent} />
       <NavBar setActiveComponent={setActiveComponent} setContentfulTmp={setContentfulTmp} nodes={edges} />
       {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
       {activeComponent === "banner" && <Banner />}
