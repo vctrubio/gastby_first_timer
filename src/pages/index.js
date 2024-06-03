@@ -128,9 +128,8 @@ const IndexPage = ({ data }) => {
   );
 
   return (
-    <>
-      <Seo title={'Interiorismo'} />
-      <div style={{ textAlign: 'center', width: '100vw', margin: '0 !important'}}>
+    <div className='cointainer'>
+      <div style={{ textAlign: 'center', width: '100%', margin: '0 !important'}}>
         <LogoBar setActiveComponent={setActiveComponent} />
         <NavBar setActiveComponent={setActiveComponent} setContentfulTmp={setContentfulTmp} nodes={edges} />
         {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
@@ -138,10 +137,11 @@ const IndexPage = ({ data }) => {
         {activeComponent === "portfolio" && <PortfolioAll edges={edges} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
         {activeComponent === "info" && <Info />}
       </div>
-    </>
+    </div>
   )
 }
 
+export const Head = () => <Seo title="Interiorismo" />
 export default IndexPage
 
 export const queryGL = graphql`

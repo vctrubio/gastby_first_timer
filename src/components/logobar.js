@@ -20,7 +20,7 @@ export const LogoBar = ({ setActiveComponent }) => {
           formats={["auto", "webp"]}
           alt="Alicia Agosti Interiorismo"
           style={{
-            width: '300px',
+            width: '200px',
             marginTop: '2em',
             transform: 'scale(1.4)',
           }}

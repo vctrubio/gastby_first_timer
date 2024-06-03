@@ -15,7 +15,7 @@ export const Footer = () => {
             <a href="tel:+34630199112" >
                 <SVG src={phoneSVG} className='svg-icon' />
             </a>
-            <a href="https://www.instagram.com/alicia.agosti.interiorismo/" taget="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/alicia.agosti.interiorismo/" taget="_black" rel="noopener noreferrer">
                 <SVG src={instagramSVG} className='svg-icon' />
             </a>
             <a href="mailto:estudio@aliciaagosti..com">

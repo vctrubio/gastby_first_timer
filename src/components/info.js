@@ -90,7 +90,7 @@ const Icons = () => {
                     </div>
                 </div>
                 <div className='d-flex flex-row align-items-center'>
-                    <a href="https://www.instagram.com/alicia.agosti.interiorismo/" taget="_blank" rel="noopener noreferrer">
+                    <a href="https://www.instagram.com/alicia.agosti.interiorismo/" taget="_black" rel="noopener noreferrer">
                         <img src={instagramSVG} alt="instagram" className='svg-icon' />
                     </a>
                     <div>
