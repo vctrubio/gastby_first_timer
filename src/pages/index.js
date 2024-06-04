@@ -119,7 +119,7 @@ const NavBar = ({ setActiveComponent, nodes, setContentfulTmp }) => {
 }
 
 const IndexPage = ({ data }) => {
-  const [activeComponent, setActiveComponent] = useState("banner");
+  const [activeComponent, setActiveComponent] = useState("portfolio");
   const [contentfulTmp, setContentfulTmp] = useState(null);
 
   const edges = data.allContentfulAliciaInterior.edges
