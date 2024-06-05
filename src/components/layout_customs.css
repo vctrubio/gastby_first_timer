@@ -93,8 +93,13 @@
     }
 }
 
+
+
 @media (max-width: 768px) {
     .navbar >* {
         margin: 0 4px 0 7px;
+    }
+    .padding-sm >*{
+       padding: 0 48px;
     }
 }

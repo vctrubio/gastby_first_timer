@@ -36,8 +36,8 @@ module.exports = {
         name: `Alicia Agosti Interiorismo de Lugo en Madrid, España`,
         short_name: `Alicia Agosti Interiorismo`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#319197`, // Specify your theme color here   // https://css-tricks.com/meta-theme-color-and-trickery/
+        background_color: `#F7F1EE`,
+        theme_color: `#F7F1EE`,
         display: `minimal-ui`,
         icon: `src/images/alilogo.png`
       },
