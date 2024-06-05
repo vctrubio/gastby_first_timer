@@ -22,6 +22,10 @@
         margin: 25px;
         cursor: pointer;
     }
+
+    h2{
+        font-size: 1.8em;
+    }
 }
 
 .about-title{

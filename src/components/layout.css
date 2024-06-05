@@ -89,6 +89,7 @@ h1 {
   letter-spacing: -0.01em;
 }
 
+
 h1>b {
   color: var(--color-primary);
 }

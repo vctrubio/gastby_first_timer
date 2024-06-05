@@ -1,5 +1,5 @@
-import * as React from "react"
-import './card_portfolio.css'
+import * as React from "react";
+import './card_portfolio.css';
 
 export const Card = ({ title, coverUrl }) => {
     return (
@@ -9,12 +9,10 @@ export const Card = ({ title, coverUrl }) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                position: 'relative',
                 width: '400px',
                 height: '360px',
                 margin: '20px',
                 cursor: 'pointer',
-                borderRadius: '4px',
                 backgroundImage: `url(${coverUrl})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -24,5 +22,5 @@ export const Card = ({ title, coverUrl }) => {
             <div className="card-portfolio-opacity"></div>
             <div id='card-title'>{title}</div>
         </div>
-    )
-}
+    );
+};
