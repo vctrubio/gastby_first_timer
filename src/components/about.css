@@ -19,13 +19,12 @@
     padding-left: 55px;
 
     >* {
-        margin: 25px;
+        margin: 20px;
         cursor: pointer;
     }
 
     h2{
-        font-size: 1.8em;
-        
+        font-size: 1.5em;
     }
 }
 
@@ -41,6 +40,6 @@
         padding-left: 0 !important;
     }
     .about-title{
-        max-width: 350px;
+        max-width: 395px;
     }
 }
