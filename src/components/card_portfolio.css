@@ -55,9 +55,6 @@
     background-color: #F7F1EE; /* Apply the exact background color */
   }
 
-  .card-portfolio:hover {
-    font-weight: bold;
-  }
 }
 
 @media (max-width: 980px) {
