@@ -16,6 +16,7 @@ export const Card = ({ title, coverUrl }) => {
                 backgroundImage: `url(${coverUrl})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                // backgroundColor: 'F7F1EE',
             }}
             className="card-portfolio"
         >
