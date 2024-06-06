@@ -12,15 +12,15 @@ export const About = () => {
         </div>
         <div className="about-component">
           <div>
-            <h2>Arquitectura</h2>
+            <div style={{fontSize: '1.5em'}}>Arquitectura</div>
             <p>Proyectamos la rehabilitación del espacio</p>
           </div>
           <div>
-            <h2>Decoración</h2>
+            <div style={{fontSize: '1.5em'}}>Decoración</div>
             <p>Adecuamos el mobiliario al diseño</p>
           </div>
           <div>
-            <h2>Diseño de mobiliario</h2>
+            <div style={{fontSize: '1.5em'}}>Diseño de mobiliario</div>
             <p>Creamos el mobiliario para personalizar el proyecto</p>
           </div>
         </div>
