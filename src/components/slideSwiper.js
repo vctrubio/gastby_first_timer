@@ -8,7 +8,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 export const SlideSwiper = ({ imgs }) => {
-  const initialActiveIndex = Math.floor(imgs.length / 3 - 1);
+  // const initialActiveIndex = Math.floor(imgs.length / 3 - 1);
+  const initialActiveIndex = 0;
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [swiper, setSwiper] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -36,7 +37,7 @@ export const SlideSwiper = ({ imgs }) => {
           slidesPerView={1}
           grabCursor={true}
           centeredSlides={true}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         >
           {imgs.map((img, index) => (
@@ -63,7 +64,7 @@ export const SlideSwiper = ({ imgs }) => {
           grabCursor={true}
           centeredSlides={true}
           lazy={true}
-          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
           initialSlide={initialActiveIndex}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         >
