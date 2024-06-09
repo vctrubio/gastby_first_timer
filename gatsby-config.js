@@ -14,10 +14,10 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Alicia Agosti`,
-    description: `Interiosismo de lujo en Madrid. Proyectos de interiorismo en España. Diseño de interiores en Madrid.`,
+    title: `Alicia Agosti Interiorismo`,
+    description: `Somos un estudio de arquitectura de interiores y decoración, con base en Madrid, nos especializamos en diseñar espacios que no solo cumplen con las necesidades, sino que también reflejan la personalidad única de cada cliente.`,
     author: `Alicia Agosti`,
-    siteUrl: `https://66433dbdf947a70008cb5616--aliciaagosti.netlify.app/`,
+    siteUrl: `https://aliciaagosti.com`,
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -29,12 +29,13 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Alicia Agosti Interiorismo de Lugo en Madrid, España`,
-        short_name: `Alicia Agosti Interiorismo`,
+        name: `Alicia Agosti Interiorismo`,
+        short_name: `Alicia Agosti`,
         start_url: `/`,
         background_color: `#F7F1EE`,
         theme_color: `#F7F1EE`,
@@ -47,7 +48,7 @@ module.exports = {
       options: {
         spaceId: process.env.SPACE_ID,
         accessToken: process.env.ACCESS_TOKEN,
-        
+
       },
     }
   ],

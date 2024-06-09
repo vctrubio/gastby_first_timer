@@ -139,7 +139,7 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export const Head = () => <Seo title="Interiorismo" />
+export const Head = () => <Seo title="Alicia Agosti Interiorismo" />
 export default IndexPage
 
 export const queryGL = graphql`

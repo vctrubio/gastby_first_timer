@@ -43,7 +43,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 
   result.data?.allContentfulAliciaInterior.edges.forEach(({ node }) => {
-    console.log('url:::: ', node.url)
+    // console.log('url:::: ', node.url)
     createPage({
       path: `/${node.url}`,
       component: require.resolve("./src/pages/contentful.js"),
