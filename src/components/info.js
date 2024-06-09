@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SVG from 'react-inlinesvg';
 import './info.css';
 import emailjs from 'emailjs-com';
 
-import whatsappSVG from '../svgs/whatsapp-black.svg'
 import phoneSVG from '../svgs/phone-black.svg'
 import mailSVG from '../svgs/mail-black.svg'
 import instagramSVG from '../svgs/insta-black.svg'
 
 const Form = () => {
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [name, setName] = useState('');
+
     const sendEmail = (e) => {
         e.preventDefault();
+        setName(e.target.elements.nombre.value);
 
         emailjs.sendForm('service_iks54bc', 'template_l508x3r', e.target, '1YErVJqzBGujS_Du3')
             .then((result) => {
-                console.log(result.text);
+                setFormSubmitted(true);
+                setTimeout(() => setFormSubmitted(false), 2000);
             }, (error) => {
                 console.log(error.text);
             });
@@ -23,6 +27,7 @@ const Form = () => {
 
     return (
         <form onSubmit={sendEmail} style={{ width: '350px' }}>
+            {formSubmitted && <p style={{ color: 'grey', fontWeight: 'bold' }}>Thank you, {name}!</p>}
             <div className="mb-3">
                 <label htmlFor="nombre" className="form-label">Nombre</label>
                 <input type="text" className="form-control" id="nombre" name="nombre" />
@@ -65,7 +70,6 @@ const Form = () => {
             </div>
             <button type="submit" className="btn btn-secondary">Submit</button>
         </form>
-
     )
 }
 
@@ -85,7 +89,7 @@ const Icons = () => {
                     <a href="tel:+34630199112" >
                         <img src={phoneSVG} alt="phone" className='svg-icon' />
                     </a>
-                    <div style={{textDecoration: 'none'}}>
+                    <div style={{ textDecoration: 'none' }}>
                         +34 630 19 91 12
                     </div>
                 </div>
@@ -103,10 +107,11 @@ const Icons = () => {
 }
 
 export const Info = () => {
+
     return (
         <div className='info'>
-                <Icons />
-                <Form />
+            <Icons />
+            <Form />
         </div>
     )
 }
