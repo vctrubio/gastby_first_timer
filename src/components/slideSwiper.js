@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-export const SlideSwiper = ({ imgs_url }) => {
-  const initialActiveIndex = Math.floor(imgs_url.length / 3 - 1);
+export const SlideSwiper = ({ imgs }) => {
+  const initialActiveIndex = Math.floor(imgs.length / 3 - 1);
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [swiper, setSwiper] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -38,13 +39,11 @@ export const SlideSwiper = ({ imgs_url }) => {
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         >
-          {imgs_url.map((url, index) => (
+          {imgs.map((img, index) => (
             <SwiperSlide key={index}>
-              <img
-                src={url}
+              <GatsbyImage
+                image={getImage(img)}
                 alt={`Slide ${index}`}
-                loading="eager"
-                onLoad={(e) => e.target.style.opacity = 1}
                 style={{
                   objectFit: 'cover',
                   width: '100%',
@@ -68,12 +67,10 @@ export const SlideSwiper = ({ imgs_url }) => {
           initialSlide={initialActiveIndex}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         >
-          {imgs_url.map((url, index) => (
+          {imgs.map((img, index) => (
             <SwiperSlide
               key={index}
               onClick={() => handleClick(index)}
-              loading="eager"
-              onLoad={(e) => e.target.style.opacity = 1}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -81,8 +78,8 @@ export const SlideSwiper = ({ imgs_url }) => {
                 height: '100%',
               }}
             >
-              <img
-                src={url}
+              <GatsbyImage
+                image={getImage(img)}
                 alt={`Slide ${index}`}
                 style={{
                   verticalAlign: 'baseline',

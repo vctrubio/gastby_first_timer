@@ -123,15 +123,15 @@ const IndexPage = ({ data }) => {
   const [contentfulTmp, setContentfulTmp] = useState(null);
 
   const edges = data.allContentfulAliciaInterior.edges
-  const imgs_url = data.allContentfulAliHome.nodes.flatMap(node =>
-    node.fotos.map(foto => foto.file.url)
+  const imgs = data.allContentfulAliHome.nodes.flatMap(node =>
+    node.fotos
   );
 
   return (
     <div style={{ textAlign: 'center', width: '100%', margin: '0 !important', overflow: 'hidden' }}>
       <LogoBar setActiveComponent={setActiveComponent} />
       <NavBar setActiveComponent={setActiveComponent} setContentfulTmp={setContentfulTmp} nodes={edges} />
-      {activeComponent === "banner" && <SlideSwiper imgs_url={imgs_url} />}
+      {activeComponent === "banner" && <SlideSwiper imgs={imgs} />}
       {activeComponent === "banner" && <Banner />}
       {activeComponent === "portfolio" && <PortfolioAll edges={edges} contentfulTmp={contentfulTmp} setContentfulTmp={setContentfulTmp} />}
       {activeComponent === "info" && <Info />}
@@ -165,10 +165,11 @@ query MyQuery {
   allContentfulAliHome {
     nodes {
       fotos {
-        gatsbyImageData
-        file {
-          url
-        }
+        gatsbyImageData(
+          width: 600
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+        )
       }
     }
   }
